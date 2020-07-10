@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron')
 app.on('ready',function(){
 	let win = new BrowserWindow({ show: false })
+	win.loadURL(`file://${__dirname}/index.html`)
 	win.once('ready-to-show', () => {
 	  win.show()
 	})
