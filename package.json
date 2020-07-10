@@ -1,0 +1,12 @@
+{
+  "name": "slippi-light",
+  "version": "0.1.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^9.1.0",
+    "slp-parser-js": "^4.1.0"
+  }
+}
