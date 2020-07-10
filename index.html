@@ -7,8 +7,13 @@
 	<body>
 		<script src="./p5.min.js"></script>
 		<script src="./main.js"></script>
-		<label for="test">Choose a slippi file (.slp)</label>
-		<input type="file" id="test" name="test" accept=".slp">
-		<button type="button" id="load">Submit</button>
+		<a href="#" id="drag">item</a>
+		<script type="text/javascript" charset="utf-8">
+			document.getElementById('drag').ondragstart = (event) => {
+				event.preventDefault()
+				ipcRenderer.send('ondragstart', '/path/to/item')
+			}
+		</script>
+
 	</body>
 </html>
