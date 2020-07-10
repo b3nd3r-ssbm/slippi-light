@@ -7,13 +7,14 @@
 	<body>
 		<script src="./p5.min.js"></script>
 		<script src="./main.js"></script>
-		<a href="#" id="drag">item</a>
+		<a href="#" id="drag">Drag your slp file here</a>
 		<script type="text/javascript" charset="utf-8">
 			document.getElementById('drag').ondragstart = (event) => {
 				event.preventDefault()
 				ipcRenderer.send('ondragstart', '/path/to/item')
 			}
 		</script>
+		<button onclick="load()">Submit file!</button>
 
 	</body>
 </html>
