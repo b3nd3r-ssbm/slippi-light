@@ -5,9 +5,17 @@ app.on('ready',function(){
 	  win.show()
 	})
 });
+const { ipcMain } = require('electron')
+
+ipcMain.on('ondragstart', (event, filePath) => {
+  event.sender.startDrag({
+    file: filePath,
+    icon: '/path/to/icon.png'
+  })
+})
+
 function load(){
 	const { default: SlippiGame } = require('slp-parser-js');
-	const slippiGame=document.getElementById("test").files[0];
-	const game = new SlippiGame(Buffer.from(slippiGame));
+	const game = new SlippiGame(FilePath);
 	const frames=game.getFrames();
 };
