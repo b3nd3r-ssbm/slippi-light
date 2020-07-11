@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron');
+var frames;
 if(app!== undefined){
 	app.on('ready',function(){
 		let win = new BrowserWindow({ 
@@ -9,21 +10,9 @@ if(app!== undefined){
 		win.loadURL(`file://${__dirname}/index.html`);
 	});
 }
-const { ipcMain } = require('electron');
-
-if(ipcMain!==undefined){
-	ipcMain.on('ondragstart', (event, filePath) => {
-  		event.sender.startDrag({
-    			file: filePath,
-    			icon: '/path/to/icon.png'
- 		 });
-		load(filePath);
-	});
-}
-
-function load(fullFilePath){
+function dropHandler(ev) {
+	ev.preventDefault();
 	const { default: SlippiGame } = require('slp-parser-js');
-	const game = new SlippiGame(fullFilePath);
-	const frames=game.getFrames();
-	console.log(fullFilePath);
-};
+	const game = new SlippiGame(Buffer.from(ev.dataTransfer.items[0].getAsFile()));
+	frames=game.getFrames();
+}
