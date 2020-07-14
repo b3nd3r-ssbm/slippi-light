@@ -4,6 +4,12 @@ var frames;
 var stage;
 var starting=false;
 var settings;
+var stats;
+var lastFrame;
+var game;
+var currentFrame=-123;
+var frameTime=0;
+var playing=true;
 if(app!== undefined){
 	app.on('ready',function(){
 		let win = new BrowserWindow({ 
@@ -26,16 +32,37 @@ if(app!== undefined){
 	background(0);
 }*/
 function setup(){
-	createCanvas(640,528);
 	loop();
-	background(0);
 }
 function process(){
-	var game = new SlippiGame(document.getElementById("fileIn").value);
+	game = new SlippiGame(document.getElementById("fileIn").value);
 	frames=game.getFrames();
 	settings=game.getSettings();
 	stage=settings.stageId;
+	stats=game.getStats();
+	lastFrame=stats.lastFrame;
 	starting=true;
+	stages();
+}
+function startStages(){
+	if(stage===2){
+		createCanvas(795,698);
+	}
+	else if(stage===3){
+		createCanvas(920,582);
+	}
+	else if(stage===8){
+		createCanvas(699,518);
+	}
+	else if(stage===28){
+		createCanvas(1020,746);
+	}
+	else if(stage===31){
+		createCanvas(896,616);
+	}
+	else if(stage===32){
+		createCanvas(984,656);
+	}
 }
 function stages(){
 	if(stage===2){
@@ -75,9 +102,23 @@ function dl(){
 function ys(){
 	
 }
-/*function draw(){
+function p1(x, y){
+	
+}
+function p2(x, y){
+	
+}
+function frameAdvance(){
+	
+}
+function draw(){
 	if(starting===true){
-		fill(255,255,255);
-		rect(200,200,200,200);
+		while(currentFrame<lastFrame&&playing){
+			if(millis()-frameTime>=16.67){
+				frameAdvance();
+			}
+		}
+		fill(0);
+		rect(mouseX,mouseY,55,55);
 	}
-}*/
+}
