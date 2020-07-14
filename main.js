@@ -1,7 +1,9 @@
 const { app, BrowserWindow } = require('electron');
+const { default: SlippiGame } = require('slp-parser-js');
 var frames;
 var stage;
 var starting=false;
+var settings;
 if(app!== undefined){
 	app.on('ready',function(){
 		let win = new BrowserWindow({ 
@@ -12,7 +14,7 @@ if(app!== undefined){
 		win.loadURL(`file://${__dirname}/index.html`);
 	});
 }
-function dropHandler(ev) {
+/*function dropHandler(ev) {
 	ev.preventDefault();
 	const { default: SlippiGame } = require('slp-parser-js');
 	const game = new SlippiGame(Buffer.from(ev.dataTransfer.items[0].getAsFile()));
@@ -20,11 +22,20 @@ function dropHandler(ev) {
 	const settings=game.getSettings();
 	stage=settings.stageId;
 	starting=true;
-}
+	createCanvas(640,528);
+	background(0);
+}*/
 function setup(){
 	createCanvas(640,528);
 	loop();
-	background(255);
+	background(0);
+}
+function process(){
+	var game = new SlippiGame(document.getElementById("fileIn").value);
+	frames=game.getFrames();
+	settings=game.getSettings();
+	stage=settings.stageId;
+	starting=true;
 }
 function stages(){
 	if(stage===2){
@@ -64,3 +75,9 @@ function dl(){
 function ys(){
 	
 }
+/*function draw(){
+	if(starting===true){
+		fill(255,255,255);
+		rect(200,200,200,200);
+	}
+}*/
