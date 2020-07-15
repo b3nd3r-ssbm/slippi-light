@@ -53,30 +53,36 @@ function process(){
 	lastFrame=stats.lastFrame;
 	starting=true;
 	switch(stage){
-	case 2:
-		createCanvas(795,698);
-		addX=397.5;
-		addY=405;
-	case 3:
-		createCanvas(920,582);
-		addX=460;
-		addY=360;
-	case 8:
-		createCanvas(699,518);
-		addX=351.4;
-		addY=336;
-	case 28:
-		createCanvas(1020,746);
-		addX=510;
-		addY=500;
-	case 31:
-		createCanvas(896,616);
-		addX=448;
-		addY=400;
-	case 32:
-		createCanvas(984,656);
-		addX=492;
-		addY=376;
+		case 2:
+			createCanvas(795,698);
+			addX=397.5;
+			addY=405;
+			break;
+		case 3:
+			createCanvas(920,582);
+			addX=460;
+			addY=360;
+			break;
+		case 8:
+			createCanvas(699,518);
+			addX=351.4;
+			addY=336;
+			break;
+		case 28:
+			createCanvas(1020,746);
+			addX=510;
+			addY=500;
+			break;
+		case 31:
+			createCanvas(896,616);
+			addX=448;
+			addY=400;
+			break;
+		case 32:
+			createCanvas(984,656);
+			addX=492;
+			addY=376;
+			break;
 	}
 	stages();
 	var hideIt=select('.toBeHidden');
@@ -89,16 +95,22 @@ function stages(){
 	switch(stage){
 		case 2:
 			fod();
+			break;
 		case 3:
 			ps();
+			break;
 		case 8:
 			ys();
+			break;
 		case 28:
 			dl();
+			break;
 		case 31:
 			bf();
+			break;
 		case 32:
 			fd();
+			break;
 	}
 }
 function fd(){
@@ -111,7 +123,15 @@ function fd(){
 	rect(320.8788, 376, 342.2424,10);
 }
 function ps(){
-	
+	stroke(0);
+	strokeWeight(1);
+	fill(255);
+	rect(0,0,919,581);
+	fill(0);
+	noStroke();
+	rect(284.5, addY, 351,10);
+	rect(350,335,30,5);
+	rect(570,335,30,5);
 }
 function fod(){
 	
@@ -126,22 +146,23 @@ function ys(){
 	
 }
 function players(){
-	var stockAdd=308;
-	var stockAdd1=636;
+	var stockAdd=((addX*2)/3)-20;
+	var stockAdd1=(((addX*2)/3)*2)-20;
 	textSize(32);
 	fill(255,0,0);
 	p1();
-	text(percent1,328,600);
+	var canvasHeight=Number(document.getElementsByTagName("CANVAS")[0].getAttribute("style").substring(22,25));
+	text(percent1,stockAdd+20,canvasHeight-50);
 	for(var i=0;i<p1Stocks;i++){
 		stockAdd+=20;
-		circle(stockAdd,620,15);
+		circle(stockAdd,canvasHeight-30,15);
 	}
 	fill(0,0,255);
 	p2();
-	text(percent2,656,600);
+	text(percent2,stockAdd1+20,canvasHeight-50);
 	for(var j=0;j<p2Stocks;j++){
 		stockAdd1+=20;
-		circle(stockAdd1,620,15);
+		circle(stockAdd1,canvasHeight-30,15);
 	}
 }
 function p1(){
