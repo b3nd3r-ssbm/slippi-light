@@ -52,64 +52,53 @@ function process(){
 	stats=game.getStats();
 	lastFrame=stats.lastFrame;
 	starting=true;
-	startStages();
-	stages();
-	var hideIt=select('.toBeHidden');
-	hideIt.style('display', 'none');
-	var unhideIt=select('#unhide');
-	unhideIt.style('display','inline');
-	firstFrame();
-}
-function startStages(){
-	if(stage===2){
+	switch(stage){
+	case 2:
 		createCanvas(795,698);
 		addX=397.5;
 		addY=405;
-	}
-	else if(stage===3){
+	case 3:
 		createCanvas(920,582);
 		addX=460;
 		addY=360;
-	}
-	else if(stage===8){
+	case 8:
 		createCanvas(699,518);
 		addX=351.4;
 		addY=336;
-	}
-	else if(stage===28){
+	case 28:
 		createCanvas(1020,746);
 		addX=510;
 		addY=500;
-	}
-	else if(stage===31){
+	case 31:
 		createCanvas(896,616);
 		addX=448;
 		addY=400;
-	}
-	else if(stage===32){
+	case 32:
 		createCanvas(984,656);
 		addX=492;
 		addY=376;
 	}
+	stages();
+	var hideIt=select('.toBeHidden');
+	hideIt.style('display', 'none');
+	var unhideIt=select('#unhide');
+	unhideIt.style('display','block');
+	firstFrame();
 }
 function stages(){
-	if(stage===2){
-		fod();
-	}
-	else if(stage===3){
-		ps();
-	}
-	else if(stage===8){
-		ys();
-	}
-	else if(stage===28){
-		dl();
-	}
-	else if(stage===31){
-		bf();
-	}
-	else if(stage===32){
-		fd();
+	switch(stage){
+		case 2:
+			fod();
+		case 3:
+			ps();
+		case 8:
+			ys();
+		case 28:
+			dl();
+		case 31:
+			bf();
+		case 32:
+			fd();
 	}
 }
 function fd(){
@@ -184,6 +173,46 @@ function frameAdvance(){
 	p1Stocks=frames[currentFrame].players[0].post.stocksRemaining;
 	p2Stocks=frames[currentFrame].players[1].post.stocksRemaining;
 }
+function pause(){
+	playing=false;
+	var hideIt=select('#pause');
+	hideIt.style('display','none');
+	var showIt=select('#play');
+	showIt.style('display','block');
+}
+function play(){
+	playing=true;
+	var hideIt=select('#play');
+	hideIt.style('display','none');
+	var showIt=select('#pause');
+	showIt.style('display','block');
+}
+function keyTyped(){
+	if(key===' '){
+		if(playing){
+			pause();
+		}
+		else{
+			play();
+		}
+	}
+}
+function keyPressed(){
+	if(keyCode===RIGHT_ARROW){
+		currentFrame+=300;
+		firstFrame();
+		if(currentFrame>lastFrame){
+			currentFrame=lastFrame;
+		}
+	}
+	else if(keyCode===LEFT_ARROW){
+		currentFrame-=300;
+		firstFrame();
+		if(currentFrame<-123){
+			currentFrame=-123;
+		}
+	}
+}
 function draw(){
 	if(starting){
 		firstFrame();
@@ -194,3 +223,4 @@ function draw(){
 		}
 	}
 }
+
