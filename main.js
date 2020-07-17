@@ -143,7 +143,22 @@ function dl(){
 	
 }
 function ys(){
-	
+	stroke(0);
+	strokeWeight(1);
+	fill(255);
+	rect(0,0,698,517);
+	stroke(0);
+	strokeWeight(10);
+	line(273,336,429.8,336);
+	line(273,336,239.4,343);
+	line(429.8,336,463.4,343);
+	line(456.75,349.3,460.6,430.49);
+	line(242.2,349.3,238.35,430.39);
+	noStroke();
+	fill(0);
+	rect(319.9,252,63,5);
+	rect(232.4,289.1,63,5);
+	rect(407.4,289.1,63,5);
 }
 function players(){
 	var stockAdd=((addX*2)/3)-20;
