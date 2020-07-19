@@ -134,7 +134,13 @@ function ps(){
 	rect(570,310,30,5);
 }
 function fod(){
-	
+	stroke(0);
+	strokeWeight(1);
+	fill(255);
+	rect(0,0,794,697);
+	noStroke();
+	fill(0);
+	rect(267.5,405,260,10);
 }
 function bf(){
 	
