@@ -2,11 +2,32 @@
   "name": "slippi-light",
   "version": "1.0.0",
   "main": "main.js",
+  "author": "b3nd3r_ssbm",
+  "description": "GPL-3.0-or-later",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "productName": "Slippi Light",
+    "appId": "com.b3nd3rssbm.slippilight",
+    "files": [
+      "index.html",
+      "main.js",
+      "p5.min.js",
+      "package.json"
+    ],
+    "mac": {
+      "category": "your.app.category.type"
+    }
   },
   "dependencies": {
-    "electron": "^9.1.0",
     "slp-parser-js": "^4.1.0"
+  },
+  "devDependencies": {
+	"electron": "^9.1.0",
+    "electron-builder": "^22.7.0"
   }
 }
