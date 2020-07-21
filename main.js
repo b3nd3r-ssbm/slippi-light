@@ -151,7 +151,16 @@ function fod(){
 	rect(267.5,405,260,10);
 }
 function bf(){
-	
+	stroke(0);
+	strokeWeight(1);
+	fill(255);
+	rect(0,0,895,615);
+	noStroke();
+	fill(0);
+	rect(311.2,400,273.6,10);
+	rect(410.4,291.2,75.2,5);
+	rect(332.8,345.6,75.2,5);
+	rect(488,345.6,75.2,5);
 }
 function dl(){
 	stroke(0);
