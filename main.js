@@ -20,6 +20,7 @@ var percent1="0%";
 var percent2="0%";
 var p1Stocks=4;
 var p2Stocks=4;
+var canvasHeight;
 if(app!== undefined){
 	app.on('ready',function(){
 		let win = new BrowserWindow({ 
@@ -54,31 +55,38 @@ function process(){
 	starting=true;
 	switch(stage){
 		case 2:
+			canvasHeight=698;
 			createCanvas(795,698);
 			addX=397.5;
 			addY=405;
 			break;
 		case 3:
+			canvasHeight=582;
 			createCanvas(920,582);
 			addX=460;
 			addY=360;
 			break;
 		case 8:
+			canvasHeight=518;
 			createCanvas(699,518);
 			addX=351.4;
 			addY=336;
 			break;
 		case 28:
+			canvasHeight=746;
 			createCanvas(1020,746);
 			addX=510;
 			addY=500;
+			canvasIndex=23;
 			break;
 		case 31:
+			canvasHeight=616;
 			createCanvas(896,616);
 			addX=448;
 			addY=400;
 			break;
 		case 32:
+			canvasHeight=656;
 			createCanvas(984,656);
 			addX=492;
 			addY=376;
@@ -146,7 +154,22 @@ function bf(){
 	
 }
 function dl(){
-	
+	stroke(0);
+	strokeWeight(1);
+	fill(255);
+	rect(0,0,1019,745);
+	noStroke();
+	fill(0);
+	rect(355.46,499.98,309.08,10);
+	rect(471.9624,397.1472,76.0752,5);
+	rect(387.2208,439.7156,59.3362,5);
+	rect(573.4102,439.515,62.7462,5);
+	strokeWeight(1);
+	stroke(0);
+	line(355.46,499.98,378.478,571.5086);
+	line(664.54,499.98,641.522,571.5086);
+	line(378.478,571.5086,641.522,571.5086);
+	noStroke();
 }
 function ys(){
 	stroke(0);
@@ -172,7 +195,6 @@ function players(){
 	textSize(32);
 	fill(255,0,0);
 	p1();
-	var canvasHeight=Number(document.getElementsByTagName("CANVAS")[0].getAttribute("style").substring(22,25));
 	text(percent1,stockAdd+20,canvasHeight-50);
 	for(var i=0;i<p1Stocks;i++){
 		stockAdd+=20;
