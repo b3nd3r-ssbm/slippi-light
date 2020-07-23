@@ -16,6 +16,8 @@ var p1X;
 var p1Y;
 var p2X;
 var p2Y;
+var p1Rad=55;
+var p2Rad=55;
 var percent1="0%";
 var percent2="0%";
 var p1Stocks=4;
@@ -218,10 +220,10 @@ function players(){
 	}
 }
 function p1(){
-	circle(p1X,p1Y,55);
+	circle(p1X,p1Y,p1Rad);
 }
 function p2(){
-	circle(p2X,p2Y,55);
+	circle(p2X,p2Y,p2Rad);
 }
 function firstFrame(){
 	stages();
@@ -245,6 +247,32 @@ function frameAdvance(){
 	percent2+="%";
 	p1Stocks=frames[currentFrame].players[0].post.stocksRemaining;
 	p2Stocks=frames[currentFrame].players[1].post.stocksRemaining;
+	switch(frames[currentFrame].players[0].post.actionStateId){
+		case 4:
+			p1Rad-=(55/180);
+			break;
+		case 7:
+			p1Rad=300;
+			break;
+		case 8:
+			p1Rad=300;
+			break;
+		default:
+			p1Rad=55;
+	}
+		switch(frames[currentFrame].players[1].post.actionStateId){
+		case 4:
+			p2Rad-=(55/180);
+			break;
+		case 7:
+			p2Rad=300;
+			break;
+		case 8:
+			p2Rad=300;
+			break;
+		default:
+			p2Rad=55;
+	}
 }
 function pause(){
 	playing=false;
