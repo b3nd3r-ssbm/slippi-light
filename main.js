@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron');
-const { default: SlippiGame } = require('slippi-js');
+const { default: SlippiGame } = require('@slippi/slippi-js');
 var frames;
 var stage;
 var starting=false;

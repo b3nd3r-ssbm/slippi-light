@@ -22,18 +22,18 @@
     "mac": {
       "category": "your.app.category.type"
     },
-	"win": {
-		"target": "NSIS"
-	},
-	"dmg": {
-		"icon": "./icon.png"
-	}
+    "win": {
+      "target": "NSIS"
+    },
+    "dmg": {
+      "icon": "./icon.png"
+    }
   },
   "dependencies": {
-    "slippi-js": "^5.0.0"
+    "@slippi/slippi-js": "^5.0.2"
   },
   "devDependencies": {
-	"electron": "^9.1.0",
+    "electron": "^9.1.0",
     "electron-builder": "^22.7.0"
   }
 }
