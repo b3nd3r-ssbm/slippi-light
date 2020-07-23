@@ -21,10 +21,16 @@
     ],
     "mac": {
       "category": "your.app.category.type"
-    }
+    },
+	"win": {
+		"target": "NSIS"
+	},
+	"dmg": {
+		"icon": "./icon.png"
+	}
   },
   "dependencies": {
-    "slp-parser-js": "^4.1.0"
+    "slippi-js": "^5.0.0"
   },
   "devDependencies": {
 	"electron": "^9.1.0",

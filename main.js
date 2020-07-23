@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron');
-const { default: SlippiGame } = require('slp-parser-js');
+const { default: SlippiGame } = require('slippi-js');
 var frames;
 var stage;
 var starting=false;
