@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const { default: SlippiGame } = require('@slippi/slippi-js');
+//const { autoUpdater } = require('electron-updater');
 var frames;
 var stage;
 var starting=false;
@@ -22,7 +23,10 @@ var percent1="0%";
 var percent2="0%";
 var p1Stocks=4;
 var p2Stocks=4;
+var p1Char;
+var p2Char;
 var canvasHeight;
+//autoUpdater.checkForUpdatesAndNotify();
 if(app!== undefined){
 	app.on('ready',function(){
 		let win = new BrowserWindow({ 
@@ -95,6 +99,8 @@ function process(){
 			break;
 	}
 	stages();
+	p1Char=charCheck(frames[0].players[0].post.internalCharacterId);
+	p2Char=charCheck(frames[0].players[1].post.internalCharacterId);
 	var hideIt=select('.toBeHidden');
 	hideIt.style('display', 'none');
 	var unhideIt=select('#unhide');
@@ -203,17 +209,21 @@ function ys(){
 function players(){
 	var stockAdd=((addX*2)/3)-20;
 	var stockAdd1=(((addX*2)/3)*2)-20;
-	textSize(32);
+	textSize(20);
 	fill(255,0,0);
 	p1();
+	text(p1Char,stockAdd+40,canvasHeight-7);
+	textSize(32);
 	text(percent1,stockAdd+20,canvasHeight-50);
 	for(var i=0;i<p1Stocks;i++){
 		stockAdd+=20;
-		circle(stockAdd,canvasHeight-30,15);
+		circle(stockAdd+20,canvasHeight-30,15);
 	}
 	fill(0,0,255);
 	p2();
 	text(percent2,stockAdd1+20,canvasHeight-50);
+	textSize(20);
+	text(p2Char,stockAdd1+40,canvasHeight-7);
 	for(var j=0;j<p2Stocks;j++){
 		stockAdd1+=20;
 		circle(stockAdd1,canvasHeight-30,15);
@@ -312,6 +322,88 @@ function keyPressed(){
 		if(currentFrame<-123){
 			currentFrame=-123;
 		}
+	}
+}
+function charCheck(charId){
+	switch(charId){
+		case 0:
+			return "Mario";
+			break;
+		case 1:
+			return "Fox";
+			break;
+		case 2:
+			return "Falcon";
+			break;
+		case 3:
+			return "DK";
+			break;
+		case 4:
+			return "Kirby";
+			break;
+		case 5:
+			return "Bowser";
+			break;
+		case 6:
+			return "Link";
+			break;
+		case 7:
+			return "Sheik";
+			break;
+		case 8:
+			return "Ness";
+			break;
+		case 9:
+			return "Peach";
+			break;
+		case 10:
+			return "Icies";
+			break;
+		case 12:
+			return "Pikachu";
+			break;
+		case 13:
+			return "Samus";
+			break;
+		case 14:
+			return "Yoshi";
+			break;
+		case 15:
+			return "Puff";
+			break;
+		case 16:
+			return "Mewtwo";
+			break;
+		case 17:
+			return "Luigi";
+			break;
+		case 18:
+			return "Marth";
+			break;
+		case 19:
+			return "Zelda";
+			break;
+		case 20:
+			return "Y. Link";
+			break;
+		case 21:
+			return "Dr. Mario";
+			break;
+		case 22:
+			return "Falco";
+			break;
+		case 23:
+			return "Pichu";
+			break;
+		case 24:
+			return "GnW";
+			break;
+		case 25:
+			return "Ganon";
+			break;
+		case 26:
+			return "Roy";
+			break;
 	}
 }
 function draw(){

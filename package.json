@@ -1,6 +1,6 @@
 {
   "name": "slippi-light",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "main.js",
   "author": "b3nd3r_ssbm",
   "description": "GPL-3.0-or-later",
@@ -20,14 +20,29 @@
       "package.json"
     ],
     "mac": {
-      "category": "your.app.category.type"
+      "category": "your.app.category.type",
+	  "target": [
+		"dmg"
+		]
     },
     "win": {
-      "target": "NSIS"
+      "target": "NSIS",
+      "publish": [
+        "github"
+      ]
     },
+	    "linux": {
+		"target": [
+			"AppImage"
+		]
+	 },
     "dmg": {
       "icon": "./icon.png"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/b3nd3r-ssbm/slippi-light.git"
   },
   "dependencies": {
     "@slippi/slippi-js": "^5.0.2"
