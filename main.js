@@ -26,6 +26,12 @@ var p2Stocks=4;
 var p1Char;
 var p2Char;
 var canvasHeight;
+var canvasWidth;
+var actionStates;
+var showAction=true;
+var p1State;
+var p2State;
+var prefix;
 //autoUpdater.checkForUpdatesAndNotify();
 if(app!== undefined){
 	app.on('ready',function(){
@@ -62,38 +68,44 @@ function process(){
 	switch(stage){
 		case 2:
 			canvasHeight=698;
-			createCanvas(795,698);
+			canvasWidth=795;
+			resizeCanvas(795,698);
 			addX=397.5;
 			addY=405;
 			break;
 		case 3:
 			canvasHeight=582;
-			createCanvas(920,582);
+			canvasWidth=920;
+			resizeCanvas(920,582);
 			addX=460;
 			addY=360;
 			break;
 		case 8:
 			canvasHeight=518;
-			createCanvas(699,518);
+			canvasWidth=699;
+			resizeCanvas(699,518);
 			addX=351.4;
 			addY=336;
 			break;
 		case 28:
 			canvasHeight=746;
-			createCanvas(1020,746);
+			canvasWidth=1020;
+			resizeCanvas(1020,746);
 			addX=510;
 			addY=500;
 			canvasIndex=23;
 			break;
 		case 31:
 			canvasHeight=616;
-			createCanvas(896,616);
+			canvasWidth=896;
+			resizeCanvas(896,616);
 			addX=448;
 			addY=400;
 			break;
 		case 32:
 			canvasHeight=656;
-			createCanvas(984,656);
+			canvasWidth=984;
+			resizeCanvas(984,656);
 			addX=492;
 			addY=376;
 			break;
@@ -105,6 +117,15 @@ function process(){
 	hideIt.style('display', 'none');
 	var unhideIt=select('#unhide');
 	unhideIt.style('display','block');
+	var xhttp=new XMLHttpRequest();
+	xhttp.onreadystatechange=function(){
+		if(this.readyState==4&&this.status==200){
+			actionStates=this.responseText.split("\n");
+		}
+	}
+	xhttp.open("GET","actionStates.csv",true);
+	xhttp.send();
+	play();
 	firstFrame();
 }
 function stages(){
@@ -212,6 +233,13 @@ function players(){
 	textSize(20);
 	fill(255,0,0);
 	p1();
+	p1State=frames[currentFrame].players[0].post.actionStateId;
+	p2State=frames[currentFrame].players[1].post.actionStateId;
+	prefix="P1 Action State: ";
+	if(actionStates!=undefined&&showAction){
+		text(prefix+actionStates[p1State],0,50);
+	}
+	prefix="P2 Action State: ";
 	text(p1Char,stockAdd+40,canvasHeight-7);
 	textSize(32);
 	text(percent1,stockAdd+20,canvasHeight-50);
@@ -223,6 +251,9 @@ function players(){
 	p2();
 	text(percent2,stockAdd1+20,canvasHeight-50);
 	textSize(20);
+	if(actionStates!=undefined&&showAction){
+		text(prefix+actionStates[p2State],canvasWidth-300,50);
+	}
 	text(p2Char,stockAdd1+40,canvasHeight-7);
 	for(var j=0;j<p2Stocks;j++){
 		stockAdd1+=20;
@@ -405,6 +436,35 @@ function charCheck(charId){
 			return "Roy";
 			break;
 	}
+}
+function changeAction(){
+	if(showAction===true){
+		showAction=false;
+	}
+	else{
+		showAction=true;
+	}
+}
+function restart(){
+	pause();
+	starting=false;
+	currentFrame=-123;
+	frameTime=0;
+	p1Rad=55;
+	p2Rad=55;
+	percent1="0%";
+	percent2="0%";
+	p1Stocks=4;
+	p2Stocks=4;
+	noStroke();
+	fill(255);
+	rect(0,0,2000,2000);
+	var hideIt=select('.toBeHidden');
+	hideIt.style('display', 'block');
+	var unhideIt=select('#unhide');
+	unhideIt.style('display','none');
+	var playButton=select('#play');
+	playButton.style('display','none');
 }
 function draw(){
 	if(starting){

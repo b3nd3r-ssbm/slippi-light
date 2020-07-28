@@ -1,6 +1,6 @@
 {
   "name": "slippi-light",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "main": "main.js",
   "author": "b3nd3r_ssbm",
   "description": "GPL-3.0-or-later",
@@ -17,27 +17,32 @@
       "index.html",
       "main.js",
       "p5.min.js",
-      "package.json"
+      "package.json",
+      "actionStates.csv"
     ],
+	"artifactName": "Slippi-Light-${version}-${os}.${ext}",
     "mac": {
       "category": "your.app.category.type",
-	  "target": [
-		"dmg"
-		]
+      "target": [
+        "dmg"
+      ]
     },
     "win": {
-      "target": "NSIS",
+      "target": "portable",
       "publish": [
         "github"
       ]
     },
-	    "linux": {
-		"target": [
-			"AppImage"
-		]
-	 },
+    "linux": {
+      "target": [
+        "AppImage"
+      ]
+    },
     "dmg": {
       "icon": "./icon.png"
+    },
+    "nsis": {
+      "unicode": "false"
     }
   },
   "repository": {
@@ -48,7 +53,7 @@
     "@slippi/slippi-js": "^5.0.2"
   },
   "devDependencies": {
-    "electron": "^9.1.0",
-    "electron-builder": "^22.7.0"
+    "electron-builder": "^22.7.0",
+    "electron": "^9.1.1"
   }
 }
