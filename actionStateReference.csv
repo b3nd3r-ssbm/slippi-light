@@ -1,0 +1,384 @@
+ID,Action State,Description
+0,DeadDown,Standard downward death
+1,DeadLeft,Standard leftward death
+2,DeadRight,Standard rightward death
+3,DeadUp,"Upward death used in 1P ""Team Kirby"", etc."
+4,DeadUpStar,Standard Star KO
+5,DeadUpStarIce,Star KO while encased in ice (Freezie)
+6,,"64-esque front fall, unused, I believe"
+7,DeadUpFallHitCamera,
+8,DeadUpFallHitCameraFlat,
+9,DeadUpFallIce,
+000A,DeadUpFallHitCameraIce,
+000B,Sleep,"""Nothing"" state, probably - it is the state Shiek/Zelda is in when their counterpart is the one currently playing. Also state of Nana when Sopo is alive"
+000C,Rebirth,Entering on halo
+000D,RebirthWait,Waiting on halo
+000E,Wait,Standing state
+000F,WalkSlow,
+10,WalkMiddle,
+11,WalkFast,
+12,Turn,
+13,TurnRun,
+14,Dash,
+15,Run,
+16,RunDirect,
+17,RunBrake,
+18,KneeBend,Pre-jump animation
+19,JumpF,First jump forward
+001A,JumpB,First jump backward
+001B,JumpAerialF,Aerial jump forward
+001C,JumpAerialB,Aerial jump backward
+001D,Fall,Falling straight down
+001E,FallF,Falling with forward DI
+001F,FallB,Falling with backward DI
+20,FallAerial,Falling after the second jump
+21,FallAerialF,Falling after the second jump with forward DI
+22,FallAerialB,Falling after the second jump with backward DI
+23,FallSpecial,Special fall after UpB or airdodge
+24,FallSpecialF,Special fall with forward DI
+25,FallSpecialB,Special fall with backward DI
+26,DamageFall,Tumbling
+27,Squat,Going from stand to crouch
+28,SquatWait,Crouching
+29,SquatRv,Going from crouch to stand
+002A,Landing,
+002B,LandingFallSpecial,Landing from special fall
+002C,Attack11,Standard attack 1
+002D,Attack12,Standard attack 2
+002E,Attack13,Standard attack 3
+002F,Attack100Start,Start of a looping standard attack
+30,Attack100Loop,Middle of a looping standard attack
+31,Attack100End,End of a looping standard attack
+32,AttackDash,Dash attack
+33,AttackS3Hi,High Ftilt
+34,AttackS3HiS,High-mid Ftilt
+35,AttackS3S,Mid Ftilt
+36,AttackS3LwS,Low-mid Ftilt
+37,AttackS3Lw,Low Ftilt
+38,AttackHi3,Uptilt
+39,AttackLw3,Downtilt
+003A,AttackS4Hi,High Fsmash
+003B,AttackS4HiS,High-mid Fsmash
+003C,AttackS4S,Mid Fsmash
+003D,AttackS4LwS,Low-mid Fsmash
+003E,AttackS4Lw,Low Fsmash
+003F,AttackHi4,Upsmash
+40,AttackLw4,Downsmash
+41,AttackAirN,Nair
+42,AttackAirF,Fair
+43,AttackAirB,Bair
+44,AttackAirHi,Uair
+45,AttackAirLw,Dair
+46,LandingAirN,Landing during Nair
+47,LandingAirF,Landing during Fair
+48,LandingAirB,Landing during Bair
+49,LandingAirHi,Landing during Uair
+004A,LandingAirLw,Landing during Dair
+004B,DamageHi1,
+004C,DamageHi2,
+004D,DamageHi3,
+004E,DamageN1,
+004F,DamageN2,
+50,DamageN3,
+51,DamageLw1,
+52,DamageLw2,
+53,DamageLw3,
+54,DamageAir1,
+55,DamageAir2,
+56,DamageAir3,
+57,DamageFlyHi,
+58,DamageFlyN,
+59,DamageFlyLw,
+005A,DamageFlyTop,
+005B,DamageFlyRoll,
+005C,LightGet,Picking up an item
+005D,HeavyGet,Picking up a heavy item (barrel)
+005E,LightThrowF,Throwing items at standard speed
+005F,LightThrowB,
+60,LightThrowHi,
+61,LightThrowLw,
+62,LightThrowDash,
+63,LightThrowDrop,
+64,LightThrowAirF,
+65,LightThrowAirB,
+66,LightThrowAirHi,
+67,LightThrowAirLw,
+68,HeavyThrowF,
+69,HeavyThrowB,
+006A,HeavyThrowHi,
+006B,HeavyThrowLw,
+006C,LightThrowF4,Throwing items at Smash speed
+006D,LightThrowB4,
+006E,LightThrowHi4,
+006F,LightThrowLw4,
+70,LightThrowAirF4,
+71,LightThrowAirB4,
+72,LightThrowAirHi4,
+73,LightThrowAirLw4,
+74,HeavyThrowF4,
+75,HeavyThrowB4,
+76,HeavyThrowHi4,
+77,HeavyThrowLw4,
+78,SwordSwing1,Beam sword swings
+79,SwordSwing3,
+007A,SwordSwing4,
+007B,SwordSwingDash,
+007C,BatSwing1,Home Run Bat swings
+007D,BatSwing3,
+007E,BatSwing4,
+007F,BatSwingDash,
+80,ParasolSwing1,Parasol swings
+81,ParasolSwing3,
+82,ParasolSwing4,
+83,ParasolSwingDash,
+84,HarisenSwing1,Fan swings
+85,HarisenSwing3,
+86,HarisenSwing4,
+87,HarisenSwingDash,
+88,StarRodSwing1,Star Rod swings
+89,StarRodSwing3,
+008A,StarRodSwing4,
+008B,StarRodSwingDash,
+008C,LipStickSwing1,Lip's Stick swings
+008D,LipStickSwing3,
+008E,LipStickSwing4,
+008F,LipStickSwingDash,
+90,ItemParasolOpen,
+91,ItemParasolFall,
+92,ItemParasolFallSpecial,
+93,ItemParasolDamageFall,
+94,LGunShoot,Raygun shots
+95,LGunShootAir,
+96,LGunShootEmpty,
+97,LGunShootAirEmpty,
+98,FireFlowerShoot,
+99,FireFlowerShootAir,
+009A,ItemScrew,
+009B,ItemScrewAir,
+009C,DamageScrew,
+009D,DamageScrewAir,
+009E,ItemScopeStart,
+009F,ItemScopeRapid,
+00A0,ItemScopeFire,
+00A1,ItemScopeEnd,
+00A2,ItemScopeAirStart,
+00A3,ItemScopeAirRapid,
+00A4,ItemScopeAirFire,
+00A5,ItemScopeAirEnd,
+00A6,ItemScopeStartEmpty,
+00A7,ItemScopeRapidEmpty,
+00A8,ItemScopeFireEmpty,
+00A9,ItemScopeEndEmpty,
+00AA,ItemScopeAirStartEmpty,
+00AB,ItemScopeAirRapidEmpty,
+00AC,ItemScopeAirFireEmpty,
+00AD,ItemScopeAirEndEmpty,
+00AE,LiftWait,
+00AF,LiftWalk1,
+00B0,LiftWalk2,
+00B1,LiftTurn,
+00B2,GuardOn,
+00B3,Guard,Holding shield
+00B4,GuardOff,
+00B5,GuardSetOff,Shield stun
+00B6,GuardReflect,
+00B7,DownBoundU,"The ""failed to tech"" bounce, facing up"
+00B8,DownWaitU,Laying on ground facing up
+00B9,DownDamageU,Getting hit laying on ground facing up
+00BA,DownStandU,
+00BB,DownAttackU,Get up attack from ground face up
+00BC,DownFowardU,
+00BD,DownBackU,
+00BE,DownSpotU,
+00BF,DownBoundD,"The ""failed to tech"" bounce, facing down"
+00C0,DownWaitD,
+00C1,DownDamageD,Lying on the ground
+00C2,DownStandD,Neutral getup
+00C3,DownAttackD,
+00C4,DownFowardD,
+00C5,DownBackD,
+00C6,DownSpotD,
+00C7,Passive,Neutral tech
+00C8,PassiveStandF,Forward tech
+00C9,PassiveStandB,Backward tech
+00CA,PassiveWall,Wall tech
+00CB,PassiveWallJump,Walljump tech/plain walljump
+00CC,PassiveCeil,Ceiling tech
+00CD,ShieldBreakFly,
+00CE,ShieldBreakFall,
+00CF,ShieldBreakDownU,
+00D0,ShieldBreakDownD,
+00D1,ShieldBreakStandU,
+00D2,ShieldBreakStandD,
+00D3,FuraFura,Shield-break tottering
+00D4,Catch,Grab
+00D5,CatchPull,Successfully grabbing a character - pulling them in
+00D6,CatchDash,
+00D7,CatchDashPull,
+00D8,CatchWait,Grabbing and holding a character
+00D9,CatchAttack,Pummel
+00DA,CatchCut,When opponent breaks of a character's grab
+00DB,ThrowF,
+00DC,ThrowB,
+00DD,ThrowHi,
+00DE,ThrowLw,
+00DF,CapturePulledHi,
+0.00E+00,CaptureWaitHi,
+0.00E+00,CaptureDamageHi,
+0.00E+00,CapturePulledLw,Becoming grabbed
+0.00E+00,CaptureWaitLw,When grabbed
+0.00E+00,CaptureDamageLw,Pummeled
+0.00E+00,CaptureCut,Grab release
+0.00E+00,CaptureJump,
+0.00E+00,CaptureNeck,
+0.00E+00,CaptureFoot,
+0.00E+00,EscapeF,roll forward
+00EA,EscapeB,roll backward
+00EB,Escape,spotdodge
+00EC,EscapeAir,airdodge
+00ED,ReboundStop,
+00EE,Rebound,
+00EF,ThrownF,
+00F0,ThrownB,
+00F1,ThrownHi,
+00F2,ThrownLw,
+00F3,ThrownLwWomen,
+00F4,Pass,Drop through platform
+00F5,Ottotto,Ledge teeter
+00F6,OttottoWait,
+00F7,FlyReflectWall,
+00F8,FlyReflectCeil,
+00F9,StopWall,
+00FA,StopCeil,
+00FB,MissFoot,
+00FC,CliffCatch,Catching the ledge
+00FD,CliffWait,Hanging on the ledge
+00FE,CliffClimbSlow,"Climbing the ledge, >100%"
+00FF,CliffClimbQuick,"Climbing the ledge, <100%"
+100,CliffAttackSlow,"Ledge attack, >100%"
+101,CliffAttackQuick,"Ledge attack, <100%"
+102,CliffEscapeSlow,"Ledge roll, >100%"
+103,CliffEscapeQuick,"Ledge roll, <100%"
+104,CliffJumpSlow1,
+105,CliffJumpSlow2,
+106,CliffJumpQuick1,
+107,CliffJumpQuick2,
+108,AppealR,Taunt right
+109,AppealL,Taunt left
+010A,ShoulderedWait,
+010B,ShoulderedWalkSlow,
+010C,ShoulderedWalkMiddle,
+010D,ShoulderedWalkFast,
+010E,ShoulderedTurn,
+010F,ThrownFF,
+110,ThrownFB,
+111,ThrownFHi,
+112,ThrownFLw,
+113,CaptureCaptain,
+114,CaptureYoshi,
+115,YoshiEgg,
+116,CaptureKoopa,
+117,CaptureDamageKoopa,
+118,CaptureWaitKoopa,
+119,ThrownKoopaF,
+011A,ThrownKoopaB,
+011B,CaptureKoopaAir,
+011C,CaptureDamageKoopaAir,
+011D,CaptureWaitKoopaAir,
+011E,ThrownKoopaAirF,
+011F,ThrownKoopaAirB,
+120,CaptureKirby,
+121,CaptureWaitKirby,
+122,ThrownKirbyStar,
+123,ThrownCopyStar,
+124,ThrownKirby,
+125,BarrelWait,
+126,Bury,
+127,BuryWait,
+128,BuryJump,
+129,DamageSong,
+012A,DamageSongWait,
+012B,DamageSongRv,
+012C,DamageBind,
+012D,CaptureMewtwo,
+012E,CaptureMewtwoAir,
+012F,ThrownMewtwo,
+130,ThrownMewtwoAir,
+131,WarpStarJump,
+132,WarpStarFall,
+133,HammerWait,
+134,HammerWalk,
+135,HammerTurn,
+136,HammerKneeBend,
+137,HammerFall,
+138,HammerJump,
+139,HammerLanding,
+013A,KinokoGiantStart,Super/Poison mushroom states
+013B,KinokoGiantStartAir,
+013C,KinokoGiantEnd,
+013D,KinokoGiantEndAir,
+013E,KinokoSmallStart,
+013F,KinokoSmallStartAir,
+140,KinokoSmallEnd,
+141,KinokoSmallEndAir,
+142,Entry,Warp in at beginning of match.
+143,EntryStart,
+144,EntryEnd,
+145,DamageIce,
+146,DamageIceJump,
+147,CaptureMasterhand,
+148,CapturedamageMasterhand,
+149,CapturewaitMasterhand,
+014A,ThrownMasterhand,
+014B,CaptureKirbyYoshi,
+014C,KirbyYoshiEgg,
+014D,CaptureLeadead,
+014E,CaptureLikelike,
+014F,DownReflect,
+150,CaptureCrazyhand,
+151,CapturedamageCrazyhand,
+152,CapturewaitCrazyhand,
+153,ThrownCrazyhand,
+154,BarrelCannonWait,
+155,Wait1,Nothing beyond this point is
+156,Wait2,
+157,Wait3,
+158,Wait4,
+159,WaitItem,
+015A,SquatWait1,
+015B,SquatWait2,
+015C,SquatWaitItem,
+015D,GuardDamage,
+015E,EscapeN,
+015F,AttackS4Hold,
+160,HeavyWalk1,
+161,HeavyWalk2,
+162,ItemHammerWait,
+163,ItemHammerMove,
+164,ItemBlind,
+165,DamageElec,
+166,FuraSleepStart,
+167,FuraSleepLoop,
+168,FuraSleepEnd,
+169,WallDamage,
+016A,CliffWait1,
+016B,CliffWait2,
+016C,SlipDown,
+016D,Slip,
+016E,SlipTurn,
+016F,SlipDash,
+170,SlipWait,
+171,SlipStand,
+172,SlipAttack,
+173,SlipEscapeF,
+174,SlipEscapeB,
+175,AppealS,
+176,Zitabata,
+177,CaptureKoopaHit,
+178,ThrownKoopaEndF,
+179,ThrownKoopaEndB,
+017A,CaptureKoopaAirHit,
+017B,ThrownKoopaAirEndF,
+017C,ThrownKoopaAirEndB,
+017D,ThrownKirbyDrinkSShot,
+017E,ThrownKirbySpitSShot,
