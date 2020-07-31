@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const { default: SlippiGame } = require('@slippi/slippi-js');
+const fs=require('fs');
 //const { autoUpdater } = require('electron-updater');
 var frames;
 var stage;
@@ -32,6 +33,12 @@ var showAction=true;
 var p1State;
 var p2State;
 var prefix;
+var fileDir;
+fs.readFile('setup.txt', 'utf8', function(err, data){ 
+	fileDir=data;
+});
+var slpFileList;
+var sel;
 //autoUpdater.checkForUpdatesAndNotify();
 if(app!== undefined){
 	app.on('ready',function(){
@@ -54,11 +61,71 @@ if(app!== undefined){
 	createCanvas(640,528);
 	background(0);
 }*/
+
 function setup(){
 	loop();
+	createCanvas(0,0);
+}
+function updateDir(){
+	fs.writeFile("setup.txt",document.getElementById("newDir").value,function(err){
+		if(err){
+			return console.log(err);
+		}
+		showDir();
+	});
+}
+function readTheDir(){
+	showDir();
+	fs.readdir(fileDir,  
+  { withFileTypes: true }, 
+  (err, files) => { 
+  if(err){ 
+    console.log(err);
+  }
+  else { 
+    slpFileList=files; 
+  } 
+}); 
+}
+function selectionPage(){
+	removeElements();
+	readTheDir();
+	sel=createSelect();
+	var i=0;
+	var currentFile;
+	if(slpFileList!=undefined){
+		for(i=0;i<slpFileList.length;i++){
+			currentFile=slpFileList[i].name;
+			if(currentFile.substring(currentFile.length-4)===".slp"){
+				sel.option(currentFile);
+			}
+		}
+	}
+}
+function showButtons(){
+	readTheDir();
+	var selection=select('#buttonPage');
+	selection.style('display','block');
+	selection=select('#fileDir');
+	selection.style('display','none');
+	selectionPage();
+}
+function showDir(){
+	fs.readFile('setup.txt', 'utf8', function(err, data){ 
+		fileDir=data;
+		document.getElementById("dirHere").innerHTML=data;		
+	});
+	}
+function changeDir(){
+	var unhide=select('#fileDir');
+	unhide.style('display','block');
 }
 function process(){
-	game = new SlippiGame(document.getElementById("fileIn").value);
+	removeElements();
+	var directory=fileDir;
+	directory+="/";
+	directory+=sel.value();
+	game = new SlippiGame(directory);
 	frames=game.getFrames();
 	settings=game.getSettings();
 	stage=settings.stageId;
@@ -113,10 +180,14 @@ function process(){
 	stages();
 	p1Char=charCheck(frames[0].players[0].post.internalCharacterId);
 	p2Char=charCheck(frames[0].players[1].post.internalCharacterId);
-	var hideIt=select('.toBeHidden');
-	hideIt.style('display', 'none');
+	var selection=select('#buttonPage');
+	selection.style('display','none');
 	var unhideIt=select('#unhide');
 	unhideIt.style('display','block');
+	selection=select('#init');
+	selection.style('display','none');
+	selection=select('#fileDir');
+	selection.style('display','none');
 	var xhttp=new XMLHttpRequest();
 	xhttp.onreadystatechange=function(){
 		if(this.readyState==4&&this.status==200){
@@ -446,6 +517,7 @@ function changeAction(){
 	}
 }
 function restart(){
+	page=1;
 	pause();
 	starting=false;
 	currentFrame=-123;
@@ -465,6 +537,9 @@ function restart(){
 	unhideIt.style('display','none');
 	var playButton=select('#play');
 	playButton.style('display','none');
+	hideIt=select('#init');
+	hideIt.style('display','none');
+	selectionPage();
 }
 function draw(){
 	if(starting){
@@ -476,4 +551,3 @@ function draw(){
 		}
 	}
 }
-
