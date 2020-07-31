@@ -34,11 +34,12 @@ var p1State;
 var p2State;
 var prefix;
 var fileDir;
+var directory;
+var sel;
 fs.readFile('setup.txt', 'utf8', function(err, data){ 
 	fileDir=data;
 });
 var slpFileList;
-var sel;
 //autoUpdater.checkForUpdatesAndNotify();
 if(app!== undefined){
 	app.on('ready',function(){
@@ -65,6 +66,8 @@ if(app!== undefined){
 function setup(){
 	loop();
 	createCanvas(0,0);
+	sel=createSelect();
+	sel.style('display','none');
 }
 function updateDir(){
 	fs.writeFile("setup.txt",document.getElementById("newDir").value,function(err){
@@ -87,10 +90,16 @@ function readTheDir(){
   } 
 }); 
 }
+function restartSelection(){
+	var showStuff=select('#init');
+	showStuff.style('display','block');
+	sel.style('display','block');
+}
 function selectionPage(){
-	removeElements();
+	var showStuff=select('#init');
+	showStuff.style('display','block');
 	readTheDir();
-	sel=createSelect();
+	sel.style('display','block');
 	var i=0;
 	var currentFile;
 	if(slpFileList!=undefined){
@@ -121,8 +130,8 @@ function changeDir(){
 	unhide.style('display','block');
 }
 function process(){
-	removeElements();
-	var directory=fileDir;
+	sel.style('display','none');
+	directory=fileDir;
 	directory+="/";
 	directory+=sel.value();
 	game = new SlippiGame(directory);
@@ -531,15 +540,15 @@ function restart(){
 	noStroke();
 	fill(255);
 	rect(0,0,2000,2000);
-	var hideIt=select('.toBeHidden');
-	hideIt.style('display', 'block');
 	var unhideIt=select('#unhide');
 	unhideIt.style('display','none');
 	var playButton=select('#play');
 	playButton.style('display','none');
-	hideIt=select('#init');
+	var hideIt=select('#init');
 	hideIt.style('display','none');
+	resizeCanvas(0,0);
 	selectionPage();
+	directory=fileDir;
 }
 function draw(){
 	if(starting){
