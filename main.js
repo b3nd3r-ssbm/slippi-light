@@ -36,6 +36,10 @@ var prefix;
 var fileDir;
 var directory;
 var sel;
+var speed=1;
+var frameMil=16.67;
+var speedHandler;
+var showHitbox=true;
 fs.readFile('setup.txt', 'utf8', function(err, data){ 
 	fileDir=data;
 });
@@ -76,6 +80,18 @@ function updateDir(){
 		}
 		showDir();
 	});
+}
+function toggleHitbox(){
+	if(showHitbox){
+		showHitbox=false;
+	}
+	else{
+		showHitbox=true;
+	}
+}
+function updateSpeed(){
+	speed=parseFloat(document.getElementById('speed').value);
+	frameRate(60*speed);
 }
 function readTheDir(){
 	showDir();
@@ -339,6 +355,10 @@ function players(){
 		stockAdd1+=20;
 		circle(stockAdd1,canvasHeight-30,15);
 	}
+	if(showHitbox){
+		attackState(frames[currentFrame].players[0].post.actionStateId,0);
+		attackState(frames[currentFrame].players[1].post.actionStateId,1);
+	}
 }
 function p1(){
 	circle(p1X,p1Y,p1Rad);
@@ -550,11 +570,146 @@ function restart(){
 	selectionPage();
 	directory=fileDir;
 }
+function attackState(curState,player){
+	switch(curState){
+		case 44: //jab 1
+			drawHitbox(player,1);
+			break;
+		case 45: //jab 2
+			drawHitbox(player,1);
+			break;
+		case 46: //jab 3
+			drawHitbox(player,1);
+			break;
+		case 47: //start of rapid jab
+			drawHitbox(player,1);
+			break;
+		case 48: //middle of rapid jab
+			drawHitbox(player,1);
+			break;
+		case 49: //end of rapid jab
+			drawHitbox(player,1);
+			break;
+		case 50: //da
+			drawHitbox(player,1);
+			break;
+		case 51: //uaft
+			drawHitbox(player,6);
+			break;
+		case 52: //high mid ftilt
+			drawHitbox(player,6); //it's the same as high ftilt but idc
+			break;
+		case 53: //mid ftilt
+			drawHitbox(player,1);
+			break;
+		case 54: //low mid ftilt
+			drawHitbox(player,4);
+			break;
+		case 55: //low ftilt
+			drawHitbox(player,4);
+			break;
+		case 56: //uptilt
+			drawHitbox(player,2);
+			break;
+		case 57: //downtilt
+			drawHitbox(player,3);
+			drawHitbox(player,4);
+			break;
+		case 58: //fsmash
+			drawHitbox(player,1);
+			break;
+		case 59: //fsmash
+			drawHitbox(player,1);
+			break;
+		case 60: //fsmash
+			drawHitbox(player,1);
+			break;
+		case 61: //fsmash
+			drawHitbox(player,1);
+			break;
+		case 62: //fsmash
+			drawHitbox(player,1);
+			break;
+		case 63: //upsmash
+			drawHitbox(player,0);
+			drawHitbox(player,8);
+			break;
+		case 64: //downsmash
+			drawHitbox(player,4);
+			drawHitbox(player,3);
+			drawHitbox(player,5);
+		case 65: //nair
+			drawHitbox(player,0);
+			break;
+		case 66: //fair
+			drawHitbox(player,1);
+			break;
+		case 67: //bair
+			drawHitbox(player,2);
+			break;
+		case 68: //uair
+			drawHitbox(player,8);
+			break;
+		case 69: //nice, also dair
+			drawHitbox(player,3);
+			break;
+	}
+}
+function drawHitbox(player,side){
+	if(player===0){//p1
+		hitbox(side,p1X,p1Y,frames[currentFrame].players[0].post.facingDirection);
+	}
+	else if(player===1){//p2
+		hitbox(side,p2X,p2Y,frames[currentFrame].players[1].post.facingDirection);
+	}
+}
+function hitbox(side,startX,startY,facing){
+	fill(255,170,170);
+	noStroke();
+	startX-=Math.sqrt(253.125);
+	startY-=Math.sqrt(253.125);
+	var addNum=22.5;
+	addNum*=facing;
+	switch(side){
+		case 0: //inside
+			break;
+		case 1: //forward
+			startX+=addNum;
+			break;
+		case 2: //backward
+			startX-=addNum;
+			break;
+		case 3: //down
+			startY+=22.5;
+			break;
+		case 4: //forward and down
+			startX+=addNum;
+			startY+=22.5;
+			break;
+		case 5: //backward and down
+			startX-=addNum;
+			startY+=22.5;
+			break;
+		case 6: //forward and up
+			startX+=addNum;
+			startY-=22.5;
+			break;
+		case 7: //backward and up
+			startX-=addNum;
+			startY-=22.5;
+			break;
+		case 8: //up
+			startY-=22.5;
+			break;
+	}
+	square(startX,startY,22.5);
+}
 function draw(){
+	frameMil=16.67/speed;
 	if(starting){
 		firstFrame();
 		if(currentFrame<lastFrame&&playing){
-			if(millis()-frameTime>=16.67){
+			if(millis()-frameTime>=frameMil){
 				frameAdvance();
 			}
 		}

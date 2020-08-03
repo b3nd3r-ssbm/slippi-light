@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Slippi Light v1.2.1</title>
+		<title>Slippi Light v1.3.0</title>
 		<meta charset='utf-8'>
 	</head>
 	<body>
@@ -25,9 +25,12 @@
 			<button onclick="restart()">Play another slp file</button>
 			<button onclick="frameAdvance()">Forward one frame</button>
 			<button onclick="changeAction()">Show/Hide Action States</button>
+			<button onclick="toggleHitbox()">Show/Hide "Hitboxes"</button>
+			Playback Speed (default is 1):
+			<input type="number" id="speed" placeholder="1.0" step="0.25" onchange="updateSpeed()" min="0.25" max="4.0">
 			<button id="pause" onclick="pause()">Pause</button>
 			<a href="https://github.com/b3nd3r-ssbm/slippi-light/blob/master/actionStateReference.csv">What do the action states mean?</a>
 		</div>
-		<button id="play" onclick="play()" style="display:none">Play </button>
+		<button id="play" onclick="play()" style="display:none">Play</button>
 	</body>
 </html>
