@@ -14,7 +14,9 @@
 				<input type="submit">
 			</form>
 			<br><h3>OR</h3><br>
-			<button onclick="jsonTime()">Upload processed JSON</button>
+			<label for="jsonIn">Upload processed JSON</label>
+			<input type="file" accept=".json" id="jsonIn">
+			<button onclick="jsonTime()">Submit</button>
 		</div>
 		<div id="unhide" style="display:none">
 			<button onclick="restart()">Play another slp file</button>
