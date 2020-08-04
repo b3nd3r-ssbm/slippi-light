@@ -40,6 +40,9 @@ var speed=1;
 var frameMil=16.67;
 var speedHandler;
 var showHitbox=true;
+var combos;
+var dropdownIndex=[];
+var generated=false;
 fs.readFile('setup.txt', 'utf8', function(err, data){ 
 	fileDir=data;
 });
@@ -135,6 +138,23 @@ function showButtons(){
 	selection.style('display','none');
 	selectionPage();
 }
+function makeOption(textStr){
+	var thisSelect=document.getElementById("comboDropdown");
+	var newOption=document.createElement("option");
+	newOption.text=textStr;
+	thisSelect.add(newOption);
+}
+function submitCombos(){
+	var hideIt=select('#comboPick');
+	hideIt.style('display','none');
+	hideIt=select('#unhide');
+	hideIt.style('display','block');
+	var curSel=document.getElementById("comboDropdown");
+	currentFrame=combos[dropdownIndex[curSel.selectedIndex]].startFrame;
+	lastFrame=combos[dropdownIndex[curSel.selectedIndex]].endFrame;
+	play();
+	pause();
+}
 function showDir(){
 	fs.readFile('setup.txt', 'utf8', function(err, data){ 
 		fileDir=data;
@@ -156,6 +176,7 @@ function process(){
 	stage=settings.stageId;
 	stats=game.getStats();
 	lastFrame=stats.lastFrame;
+	combos=game.comboComputer.combos;
 	starting=true;
 	switch(stage){
 		case 2:
@@ -322,6 +343,87 @@ function ys(){
 	rect(319.9,252,63,5);
 	rect(232.4,289.1,63,5);
 	rect(407.4,289.1,63,5);
+}
+function comboPage(){
+	pause();
+	fill(255);
+	rect(0,0,2000,2000);
+	var hideStuff=select('#unhide');
+	hideStuff.style('display','none');
+	hideStuff=select('#play');
+	hideStuff.style('display','none');
+	if(!generated){
+		hideStuff=select('#combos');
+		hideStuff.style('display','block');
+		generated=true;
+	}
+	else{
+		filterCombos();
+	}
+}
+function filterCombos(){
+	var hideStuff=select('#combos');
+	hideStuff.style('display','none');
+	if(dropdownIndex==0){
+	var minPercent=parseInt(document.getElementById("percent").value);
+	var ports;
+	if(document.getElementById("port1").checked){
+		if(document.getElementById("port2").checked){
+			ports=2;
+		}
+		else{
+			ports=0;
+		}
+	}
+	else{
+		ports=1;
+	}
+	var didKill=document.getElementById("didKill").checked;
+	var moveCount=parseInt(document.getElementById("minMoves").value);
+	var i=0;
+	var percentDone;
+	var textSend;
+	var roundedPercent;
+	console.log(didKill+" "+ports+" "+minPercent+" "+moveCount);
+	for(i=0;i<combos.length;i++){
+		percentDone=combos[i].endPercent;
+		percentDone-=combos[i].startPercent;
+		roundedPercent=Math.floor(percentDone);
+		textSend="Performed by player ";
+		textSend+=combos[i].playerIndex+1;
+		textSend+=", Starting Frame: "
+		textSend+=combos[i].startFrame;
+		textSend+=", Ending Frame: ";
+		textSend+=combos[i].endFrame;
+		textSend+=", Length: ";
+		textSend+=combos[i].moves.length;
+		textSend+=", Percent Done: ";
+		textSend+=roundedPercent;
+		if(didKill){
+			console.log(didKill);
+			if(combos[i].didKill&&combos[i].moves.length>=moveCount&&percentDone>=minPercent){
+				if(ports==combos[i].playerIndex||ports==2){
+					makeOption(textSend);
+					dropdownIndex.push(i);
+				}
+			}
+		}
+		else{
+			if(combos[i].moves.length>=moveCount&&percentDone>=minPercent){
+				console.log("huh");
+				if(ports==combos[i].playerIndex||ports==2){
+					makeOption(textSend);
+					dropdownIndex.push(i);
+				}
+			}
+		}
+	}
+	}
+	var unhideItNow=select('#comboPick');
+	unhideItNow.style('display','block');
+	fill(255);
+	noStroke();
+	square(0,0,2000);
 }
 function players(){
 	var stockAdd=((addX*2)/3)-20;
