@@ -43,6 +43,8 @@ var showHitbox=true;
 var combos;
 var dropdownIndex=[];
 var generated=false;
+var p1Port=0;
+var p2Port=1;
 fs.readFile('setup.txt', 'utf8', function(err, data){ 
 	fileDir=data;
 });
@@ -178,6 +180,10 @@ function process(){
 	lastFrame=stats.lastFrame;
 	combos=game.comboComputer.combos;
 	starting=true;
+	p1Port=settings.players[0].port;
+	p1Port--;
+	p2Port=settings.players[1].port;
+	p2Port--;
 	switch(stage){
 		case 2:
 			canvasHeight=698;
@@ -224,8 +230,8 @@ function process(){
 			break;
 	}
 	stages();
-	p1Char=charCheck(frames[0].players[0].post.internalCharacterId);
-	p2Char=charCheck(frames[0].players[1].post.internalCharacterId);
+	p1Char=charCheck(frames[0].players[p1Port].post.internalCharacterId);
+	p2Char=charCheck(frames[0].players[p2Port].post.internalCharacterId);
 	var selection=select('#buttonPage');
 	selection.style('display','none');
 	var unhideIt=select('#unhide');
@@ -431,8 +437,8 @@ function players(){
 	textSize(20);
 	fill(255,0,0);
 	p1();
-	p1State=frames[currentFrame].players[0].post.actionStateId;
-	p2State=frames[currentFrame].players[1].post.actionStateId;
+	p1State=frames[currentFrame].players[p1Port].post.actionStateId;
+	p2State=frames[currentFrame].players[p2Port].post.actionStateId;
 	prefix="P1 Action State: ";
 	if(actionStates!=undefined&&showAction){
 		text(prefix+actionStates[p1State],0,50);
@@ -458,8 +464,8 @@ function players(){
 		circle(stockAdd1,canvasHeight-30,15);
 	}
 	if(showHitbox){
-		attackState(frames[currentFrame].players[0].post.actionStateId,0);
-		attackState(frames[currentFrame].players[1].post.actionStateId,1);
+		attackState(frames[currentFrame].players[p1Port].post.actionStateId,0);
+		attackState(frames[currentFrame].players[p2Port].post.actionStateId,1);
 	}
 }
 function p1(){
@@ -470,13 +476,13 @@ function p2(){
 }
 function firstFrame(){
 	stages();
-	p1X=frames[currentFrame].players[0].post.positionX*2;
+	p1X=frames[currentFrame].players[p1Port].post.positionX*2;
 	p1X+=addX;
-	p1Y=frames[currentFrame].players[0].post.positionY*-2;
+	p1Y=frames[currentFrame].players[p1Port].post.positionY*-2;
 	p1Y+=addY;
-	p2X=frames[currentFrame].players[1].post.positionX*2;
+	p2X=frames[currentFrame].players[p2Port].post.positionX*2;
 	p2X+=addX;
-	p2Y=frames[currentFrame].players[1].post.positionY*-2;
+	p2Y=frames[currentFrame].players[p2Port].post.positionY*-2;
 	p2Y+=addY;
 	players();
 	
@@ -484,13 +490,13 @@ function firstFrame(){
 function frameAdvance(){
 	currentFrame++;
 	frameTIme=millis();
-	percent1=Math.floor(frames[currentFrame].players[0].post.percent);
+	percent1=Math.floor(frames[currentFrame].players[p1Port].post.percent);
 	percent1+="%";
-	percent2=Math.floor(frames[currentFrame].players[1].post.percent);
+	percent2=Math.floor(frames[currentFrame].players[p2Port].post.percent);
 	percent2+="%";
-	p1Stocks=frames[currentFrame].players[0].post.stocksRemaining;
-	p2Stocks=frames[currentFrame].players[1].post.stocksRemaining;
-	switch(frames[currentFrame].players[0].post.actionStateId){
+	p1Stocks=frames[currentFrame].players[p1Port].post.stocksRemaining;
+	p2Stocks=frames[currentFrame].players[p2Port].post.stocksRemaining;
+	switch(frames[currentFrame].players[p1Port].post.actionStateId){
 		case 4:
 			p1Rad-=(55/180);
 			break;
@@ -503,7 +509,7 @@ function frameAdvance(){
 		default:
 			p1Rad=55;
 	}
-		switch(frames[currentFrame].players[1].post.actionStateId){
+		switch(frames[currentFrame].players[p2Port].post.actionStateId){
 		case 4:
 			p2Rad-=(55/180);
 			break;
@@ -759,10 +765,10 @@ function attackState(curState,player){
 }
 function drawHitbox(player,side){
 	if(player===0){//p1
-		hitbox(side,p1X,p1Y,frames[currentFrame].players[0].post.facingDirection);
+		hitbox(side,p1X,p1Y,frames[currentFrame].players[p1Port].post.facingDirection);
 	}
 	else if(player===1){//p2
-		hitbox(side,p2X,p2Y,frames[currentFrame].players[1].post.facingDirection);
+		hitbox(side,p2X,p2Y,frames[currentFrame].players[p2Port].post.facingDirection);
 	}
 }
 function hitbox(side,startX,startY,facing){
