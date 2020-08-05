@@ -40,21 +40,7 @@ var showHitbox=true;
 var combos;
 var dropdownIndex=[];
 var generated=false;
-fs.readFile('setup.txt', 'utf8', function(err, data){ 
-	fileDir=data;
-});
-var slpFileList;
 //autoUpdater.checkForUpdatesAndNotify();
-if(app!== undefined){
-	app.on('ready',function(){
-		let win = new BrowserWindow({ 
-			webPreferences: {
-            			nodeIntegration: true
-        		}
-		});
-		win.loadURL(`file://${__dirname}/index.html`);
-	});
-}
 /*function dropHandler(ev) { 
 	ev.preventDefault();
 	const { default: SlippiGame } = require('slp-parser-js');
@@ -66,29 +52,11 @@ if(app!== undefined){
 	createCanvas(640,528);
 	background(0);
 }*/
-function getData(){
-	var slpFile=document.getElementById("fileIn").files[0];
-	const stream=slpFile.stream();
-	const reader=stream.getReader();
-	reader.read().then(function processText({done,value}){
-		if(done){
-			document.getElementById("thisData").value=value;
-		}
-	})
-}
 function setup(){
 	loop();
 	createCanvas(0,0);
 	sel=createSelect();
 	sel.style('display','none');
-}
-function updateDir(){
-	fs.writeFile("setup.txt",document.getElementById("newDir").value,function(err){
-		if(err){
-			return console.log(err);
-		}
-		showDir();
-	});
 }
 function toggleHitbox(){
 	if(showHitbox){
@@ -101,19 +69,6 @@ function toggleHitbox(){
 function updateSpeed(){
 	speed=parseFloat(document.getElementById('speed').value);
 	frameRate(60*speed);
-}
-function readTheDir(){
-	showDir();
-	fs.readdir(fileDir,  
-  { withFileTypes: true }, 
-  (err, files) => { 
-  if(err){ 
-    console.log(err);
-  }
-  else { 
-    slpFileList=files; 
-  } 
-}); 
 }
 function restartSelection(){
 	var showStuff=select('#init');
@@ -172,7 +127,10 @@ function changeDir(){
 	unhide.style('display','block');
 }
 function process(){
-	game = JSON.parse(document.getElementById("jsonPaste"));;
+	var initGame = JSON.parse(document.getElementById("fileIn"));
+	initGame.text().then(text => {
+		game=text;
+	});
 	frames=game.frames;
 	settings=game.settings;
 	stage=settings.stageId;
