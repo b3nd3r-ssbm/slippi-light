@@ -355,8 +355,8 @@ function ps(){
 	fill(0);
 	noStroke();
 	rect(284.5, addY, 351,10);
-	rect(350,310,30,5);
-	rect(570,310,30,5);
+	rect(360,310,50,5);
+	rect(510,310,50,5);
 }
 function fod(){
 	stroke(0);
