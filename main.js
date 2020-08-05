@@ -1,6 +1,3 @@
-const { app, BrowserWindow } = require('electron');
-const { default: SlippiGame } = require('@slippi/slippi-js');
-const fs=require('fs');
 //const { autoUpdater } = require('electron-updater');
 var frames;
 var stage;
