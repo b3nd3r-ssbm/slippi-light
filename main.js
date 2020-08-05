@@ -40,6 +40,8 @@ var showHitbox=true;
 var combos;
 var dropdownIndex=[];
 var generated=false;
+var p1Port=0;
+var p2Port=1;
 //autoUpdater.checkForUpdatesAndNotify();
 /*function dropHandler(ev) { 
 	ev.preventDefault();
@@ -78,7 +80,6 @@ function restartSelection(){
 function selectionPage(){
 	var showStuff=select('#init');
 	showStuff.style('display','block');
-	readTheDir();
 	sel.style('display','block');
 	var i=0;
 	var currentFile;
@@ -137,6 +138,10 @@ function process(){
 		lastFrame=stats.lastFrame;
 		combos=game.comboComputer.combos;
 		starting=true;
+		p1Port=settings.players[0].port;
+		p1Port--;
+		p2Port=settings.players[1].port;
+		p2Port--;
 		switch(stage){
 			case 2:
 				canvasHeight=698;
@@ -183,8 +188,8 @@ function process(){
 				break;
 		}
 		stages();
-		p1Char=charCheck(frames[0].players[0].post.internalCharacterId);
-		p2Char=charCheck(frames[0].players[1].post.internalCharacterId);
+		p1Char=charCheck(frames[0].players[p1Port].post.internalCharacterId);
+		p2Char=charCheck(frames[0].players[p2Port].post.internalCharacterId);
 		var xhttp=new XMLHttpRequest();
 		xhttp.onreadystatechange=function(){
 			if(this.readyState==4&&this.status==200){
@@ -229,6 +234,108 @@ function stages(){
 		case 32:
 			fd();
 			break;
+	}
+}
+function g7GrandsShow(){
+	var viewer=select('#g7');
+	viewer.style('display','block');
+}
+function g7Grands(){
+	var gameNum=document.getElementById("g7Drop").selectedIndex;
+	var requestURL;
+	switch(gameNum){
+		case 4:
+			requestURL = 'https://gitlab.com/b3nd3r-ssbm/slippi-light-games/-/raw/master/game5.json?inline=false';
+			break;
+		case 0:
+			requestURL='https://raw.githubusercontent.com/b3nd3r-ssbm/slippi-light/master/game1.json';
+			break;
+		case 1:
+			requestURL='https://raw.githubusercontent.com/b3nd3r-ssbm/slippi-light/master/game2.json';
+			break;
+		case 3:
+			requestURL='https://raw.githubusercontent.com/b3nd3r-ssbm/slippi-light/master/game4.json';
+			break;
+		case 2:
+			requestURL='https://raw.githubusercontent.com/b3nd3r-ssbm/slippi-light/master/game3.json';
+			break;
+	}
+	let request = new XMLHttpRequest();
+	request.open('GET', requestURL);
+	request.responseType='json';
+	request.send();
+	request.onload=function(){
+		game=this.response;
+		frames=game.frames;
+		settings=game.settings;
+		stage=settings.stageId;
+		stats=game.stats;
+		lastFrame=stats.lastFrame;
+		combos=game.comboComputer.combos;
+		starting=true;
+		p1Port=settings.players[0].port;
+		p1Port--;
+		p2Port=settings.players[1].port;
+		p2Port--;
+		switch(stage){
+			case 2:
+				canvasHeight=698;
+				canvasWidth=795;
+				resizeCanvas(795,698);
+				addX=397.5;
+				addY=405;
+				break;
+			case 3:
+				canvasHeight=582;
+				canvasWidth=920;
+				resizeCanvas(920,582);
+				addX=460;
+				addY=360;
+				break;
+			case 8:
+				canvasHeight=518;
+				canvasWidth=699;
+				resizeCanvas(699,518);
+				addX=351.4;
+				addY=336;
+				break;
+			case 28:
+				canvasHeight=746;
+				canvasWidth=1020;
+				resizeCanvas(1020,746);
+				addX=510;
+				addY=500;
+				canvasIndex=23;
+				break;
+			case 31:
+				canvasHeight=616;
+				canvasWidth=896;
+				resizeCanvas(896,616);
+				addX=448;
+				addY=400;
+				break;
+			case 32:
+				canvasHeight=656;
+				canvasWidth=984;
+				resizeCanvas(984,656);
+				addX=492;
+				addY=376;
+				break;
+		}
+		stages();
+		p1Char=charCheck(frames[0].players[p1Port].post.internalCharacterId);
+		p2Char=charCheck(frames[0].players[p2Port].post.internalCharacterId);
+		var xhttp=new XMLHttpRequest();
+		xhttp.onreadystatechange=function(){
+			if(this.readyState==4&&this.status==200){
+				actionStates=this.responseText.split("\n");
+			}
+		}
+		xhttp.open("GET","https://b3nd3r-ssbm.github.io/slippi-light/actionStates.csv",true);
+		xhttp.send();
+		play();
+		firstFrame();
+		showStuff();
 	}
 }
 function fd(){
@@ -395,8 +502,8 @@ function players(){
 	textSize(20);
 	fill(255,0,0);
 	p1();
-	p1State=frames[currentFrame].players[0].post.actionStateId;
-	p2State=frames[currentFrame].players[1].post.actionStateId;
+	p1State=frames[currentFrame].players[p1Port].post.actionStateId;
+	p2State=frames[currentFrame].players[p2Port].post.actionStateId;
 	prefix="P1 Action State: ";
 	if(actionStates!=undefined&&showAction){
 		text(prefix+actionStates[p1State],0,50);
@@ -422,8 +529,8 @@ function players(){
 		circle(stockAdd1,canvasHeight-30,15);
 	}
 	if(showHitbox){
-		attackState(frames[currentFrame].players[0].post.actionStateId,0);
-		attackState(frames[currentFrame].players[1].post.actionStateId,1);
+		attackState(frames[currentFrame].players[p1Port].post.actionStateId,0);
+		attackState(frames[currentFrame].players[p2Port].post.actionStateId,1);
 	}
 }
 function p1(){
@@ -434,13 +541,13 @@ function p2(){
 }
 function firstFrame(){
 	stages();
-	p1X=frames[currentFrame].players[0].post.positionX*2;
+	p1X=frames[currentFrame].players[p1Port].post.positionX*2;
 	p1X+=addX;
-	p1Y=frames[currentFrame].players[0].post.positionY*-2;
+	p1Y=frames[currentFrame].players[p1Port].post.positionY*-2;
 	p1Y+=addY;
-	p2X=frames[currentFrame].players[1].post.positionX*2;
+	p2X=frames[currentFrame].players[p2Port].post.positionX*2;
 	p2X+=addX;
-	p2Y=frames[currentFrame].players[1].post.positionY*-2;
+	p2Y=frames[currentFrame].players[p2Port].post.positionY*-2;
 	p2Y+=addY;
 	players();
 	
@@ -448,13 +555,13 @@ function firstFrame(){
 function frameAdvance(){
 	currentFrame++;
 	frameTIme=millis();
-	percent1=Math.floor(frames[currentFrame].players[0].post.percent);
+	percent1=Math.floor(frames[currentFrame].players[p1Port].post.percent);
 	percent1+="%";
-	percent2=Math.floor(frames[currentFrame].players[1].post.percent);
+	percent2=Math.floor(frames[currentFrame].players[p2Port].post.percent);
 	percent2+="%";
-	p1Stocks=frames[currentFrame].players[0].post.stocksRemaining;
-	p2Stocks=frames[currentFrame].players[1].post.stocksRemaining;
-	switch(frames[currentFrame].players[0].post.actionStateId){
+	p1Stocks=frames[currentFrame].players[p1Port].post.stocksRemaining;
+	p2Stocks=frames[currentFrame].players[p2Port].post.stocksRemaining;
+	switch(frames[currentFrame].players[p1Port].post.actionStateId){
 		case 4:
 			p1Rad-=(55/180);
 			break;
@@ -467,7 +574,7 @@ function frameAdvance(){
 		default:
 			p1Rad=55;
 	}
-		switch(frames[currentFrame].players[1].post.actionStateId){
+		switch(frames[currentFrame].players[p2Port].post.actionStateId){
 		case 4:
 			p2Rad-=(55/180);
 			break;
@@ -723,10 +830,10 @@ function attackState(curState,player){
 }
 function drawHitbox(player,side){
 	if(player===0){//p1
-		hitbox(side,p1X,p1Y,frames[currentFrame].players[0].post.facingDirection);
+		hitbox(side,p1X,p1Y,frames[currentFrame].players[p1Port].post.facingDirection);
 	}
 	else if(player===1){//p2
-		hitbox(side,p2X,p2Y,frames[currentFrame].players[1].post.facingDirection);
+		hitbox(side,p2X,p2Y,frames[currentFrame].players[p2Port].post.facingDirection);
 	}
 }
 function hitbox(side,startX,startY,facing){
