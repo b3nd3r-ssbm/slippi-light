@@ -10,7 +10,7 @@
 		<div id="init">
 			<label for="fileIn">Upload slp file</label>
 			<input type="file" accept=".slp" id="fileIn">
-			<button onclick="getData">Get Data To Send</button>
+			<button onclick="getData()">Get Data To Send</button>
 			<form action="https://Slippi-Light-Online-Parser.b3nd3rssbm.repl.co" method="POST">
 				<input type="text" id="thisData">
 				<input type="submit">
@@ -21,7 +21,7 @@
 			<button onclick="jsonTime()">Submit</button>
 			<br><h3>OR</h3<br>
 			<label for="jsonPaste">Paste JSON Data</label>
-			<input type=text" id="jsonPatse">
+			<input type=text" id="jsonPaste">
 			<button onclick="pastedJson()">Submit</button>
 		</div>
 		<div id="unhide" style="display:none">

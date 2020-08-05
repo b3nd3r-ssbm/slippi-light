@@ -69,7 +69,16 @@ if(app!== undefined){
 	createCanvas(640,528);
 	background(0);
 }*/
-
+function getData(){
+	var slpFile=document.getElementById("fileIn").files[0];
+	const stream=slpFile.stream();
+	const reader=stream.getReader();
+	reader.read().then(function processText({done,value}){
+		if(done){
+			document.getElementById("thisData").value=value;
+		}
+	})
+}
 function setup(){
 	loop();
 	createCanvas(0,0);
