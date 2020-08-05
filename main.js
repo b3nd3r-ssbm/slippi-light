@@ -127,83 +127,83 @@ function changeDir(){
 	unhide.style('display','block');
 }
 function process(){
-	var initGame = JSON.parse(document.getElementById("fileIn"));
+	var initGame = document.getElementById("fileIn").files[0];
 	initGame.text().then(text => {
-		game=text;
-	});
-	frames=game.frames;
-	settings=game.settings;
-	stage=settings.stageId;
-	stats=game.stats;
-	lastFrame=stats.lastFrame;
-	combos=game.comboComputer.combos;
-	starting=true;
-	switch(stage){
-		case 2:
-			canvasHeight=698;
-			canvasWidth=795;
-			resizeCanvas(795,698);
-			addX=397.5;
-			addY=405;
-			break;
-		case 3:
-			canvasHeight=582;
-			canvasWidth=920;
-			resizeCanvas(920,582);
-			addX=460;
-			addY=360;
-			break;
-		case 8:
-			canvasHeight=518;
-			canvasWidth=699;
-			resizeCanvas(699,518);
-			addX=351.4;
-			addY=336;
-			break;
-		case 28:
-			canvasHeight=746;
-			canvasWidth=1020;
-			resizeCanvas(1020,746);
-			addX=510;
-			addY=500;
-			canvasIndex=23;
-			break;
-		case 31:
-			canvasHeight=616;
-			canvasWidth=896;
-			resizeCanvas(896,616);
-			addX=448;
-			addY=400;
-			break;
-		case 32:
-			canvasHeight=656;
-			canvasWidth=984;
-			resizeCanvas(984,656);
-			addX=492;
-			addY=376;
-			break;
-	}
-	stages();
-	p1Char=charCheck(frames[0].players[0].post.internalCharacterId);
-	p2Char=charCheck(frames[0].players[1].post.internalCharacterId);
-	var selection=select('#buttonPage');
-	selection.style('display','none');
-	var unhideIt=select('#unhide');
-	unhideIt.style('display','block');
-	selection=select('#init');
-	selection.style('display','none');
-	selection=select('#fileDir');
-	selection.style('display','none');
-	var xhttp=new XMLHttpRequest();
-	xhttp.onreadystatechange=function(){
-		if(this.readyState==4&&this.status==200){
-			actionStates=this.responseText.split("\n");
+		game=JSON.parse(text);
+		frames=game.frames;
+		settings=game.settings;
+		stage=settings.stageId;
+		stats=game.stats;
+		lastFrame=stats.lastFrame;
+		combos=game.comboComputer.combos;
+		starting=true;
+		switch(stage){
+			case 2:
+				canvasHeight=698;
+				canvasWidth=795;
+				resizeCanvas(795,698);
+				addX=397.5;
+				addY=405;
+				break;
+			case 3:
+				canvasHeight=582;
+				canvasWidth=920;
+				resizeCanvas(920,582);
+				addX=460;
+				addY=360;
+				break;
+			case 8:
+				canvasHeight=518;
+				canvasWidth=699;
+				resizeCanvas(699,518);
+				addX=351.4;
+				addY=336;
+				break;
+			case 28:
+				canvasHeight=746;
+				canvasWidth=1020;
+				resizeCanvas(1020,746);
+				addX=510;
+				addY=500;
+				canvasIndex=23;
+				break;
+			case 31:
+				canvasHeight=616;
+				canvasWidth=896;
+				resizeCanvas(896,616);
+				addX=448;
+				addY=400;
+				break;
+			case 32:
+				canvasHeight=656;
+				canvasWidth=984;
+				resizeCanvas(984,656);
+				addX=492;
+				addY=376;
+				break;
 		}
-	}
-	xhttp.open("GET","actionStates.csv",true);
-	xhttp.send();
-	play();
-	firstFrame();
+		stages();
+		p1Char=charCheck(frames[0].players[0].post.internalCharacterId);
+		p2Char=charCheck(frames[0].players[1].post.internalCharacterId);
+		var xhttp=new XMLHttpRequest();
+		xhttp.onreadystatechange=function(){
+			if(this.readyState==4&&this.status==200){
+				actionStates=this.responseText.split("\n");
+			}
+		}
+		xhttp.open("GET","https://b3nd3r-ssbm.github.io/slippi-light/actionStates.csv",true);
+		xhttp.send();
+		play();
+		firstFrame();
+		showStuff();
+	});
+	
+}
+function showStuff(){
+		var unhideIt=select('#unhide');
+		unhideIt.style('display','block');
+		var selection=select('#init');
+		selection.style('display','none');
 }
 function stages(){
 	switch(stage){
