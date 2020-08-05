@@ -245,7 +245,7 @@ function g7Grands(){
 	var requestURL;
 	switch(gameNum){
 		case 4:
-			requestURL = 'https://gitlab.com/b3nd3r-ssbm/slippi-light-games/-/raw/master/game5.json?inline=false';
+			requestURL = 'https://raw.githubusercontent.com/b3nd3r-ssbm/slippi-light/master/game5.json';
 			break;
 		case 0:
 			requestURL='https://raw.githubusercontent.com/b3nd3r-ssbm/slippi-light/master/game1.json';
