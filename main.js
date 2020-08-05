@@ -199,6 +199,10 @@ function process(){
 	});
 	
 }
+function jsonTut(){
+	var unhideIt=select('#jsonTut');
+	unhideIt.style('display','block');
+}
 function showStuff(){
 		var unhideIt=select('#unhide');
 		unhideIt.style('display','block');

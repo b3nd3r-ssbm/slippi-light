@@ -10,7 +10,11 @@
 		<div id="init">
 			<label for="fileIn">Upload processed JSON from slp file</label>
 			<input type="file" accept=".json" id="fileIn">
-			<button onclick="process()">Submit</button>
+			<button onclick="process()">Submit</button><br>
+			<button onclick="jsonTut()">How Do I get JSONs for this?</button>
+			<div id="jsonTut" style="display:none">
+				<p>Go to <a href="https://repl.it/@b3nd3rssbm/SL-JSON-Generator">this repl</a> and fork it. Then, upload your slp file. Then, change "slp.slp" in `const game = new SlippiGame("slp.slp");` to your slp file's name, and click the run button. There should now be a file called "game.json". Open it and copy its contents into a local json file. Then upload that json here and watch away!</p>
+			</div>
 		</div>
 		<div id="unhide" style="display:none">
 			<button onclick="restart()">Play another slp file</button>
