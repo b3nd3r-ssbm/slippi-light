@@ -172,15 +172,11 @@ function changeDir(){
 	unhide.style('display','block');
 }
 function process(){
-	sel.style('display','none');
-	directory=fileDir;
-	directory+="/";
-	directory+=sel.value();
-	game = new SlippiGame(directory);
-	frames=game.getFrames();
-	settings=game.getSettings();
+	game = JSON.parse(document.getElementById("jsonPaste"));;
+	frames=game.frames;
+	settings=game.settings;
 	stage=settings.stageId;
-	stats=game.getStats();
+	stats=game.stats;
 	lastFrame=stats.lastFrame;
 	combos=game.comboComputer.combos;
 	starting=true;
