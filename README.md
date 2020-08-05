@@ -1,5 +1,7 @@
 # slippi-light
 A way for low-end PC users to watch Slippi Replays!
+<h1>I want to try it, but I don't want to install</h1>
+<a href="https://b3nd3r-ssbm.github.io/slippi-light/">Try it in your browser!</a>
 <h1>How it works</h1>
 In order to avoid needing to recreate Melee's engine, I used positional data collected by Slippi instead, meaning that this will not be a game, only a way to watch replays. I did this to save me and the client computer a lot of work.
 <h1>Stage info sources</h1>
