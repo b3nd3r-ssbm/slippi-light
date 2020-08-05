@@ -8,9 +8,11 @@
 		<script src="./p5.min.js"></script>
 		<script src="./main.js"></script>
 		<div id="init">
+			<label for="fileIn">Upload slp file</label>
+			<input type="file" accept=".slp" id="fileIn">
+			<button onclick="getData">Get Data To Send</button>
 			<form action="https://Slippi-Light-Online-Parser.b3nd3rssbm.repl.co" method="POST">
-				<label for="fileIn">Upload slp file</label>
-				<input type="file" accept=".slp" id="fileIn">
+				<input type="text" id="thisData">
 				<input type="submit">
 			</form>
 			<br><h3>OR</h3><br>
