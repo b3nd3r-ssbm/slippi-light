@@ -545,12 +545,13 @@ function firstFrame(){
 	p1X+=addX;
 	p1Y=frames[currentFrame].players[p1Port].post.positionY*-2;
 	p1Y+=addY;
+	p1Y-=22.5;
 	p2X=frames[currentFrame].players[p2Port].post.positionX*2;
 	p2X+=addX;
 	p2Y=frames[currentFrame].players[p2Port].post.positionY*-2;
 	p2Y+=addY;
+	p2Y-=22.5;
 	players();
-	
 }
 function frameAdvance(){
 	currentFrame++;
