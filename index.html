@@ -14,7 +14,12 @@
 			<button onclick="process()">Submit</button><br>
 			<button onclick="jsonTut()">How Do I get JSONs for this?</button>
 			<div id="jsonTut" style="display:none">
-				<p>Go to <a href="https://repl.it/@b3nd3rssbm/SL-JSON-Generator">this repl</a> and fork it. Then, upload your slp file. Then, change "slp.slp" in `const game = new SlippiGame("slp.slp");` to your slp file's name, and click the run button. There should now be a file called "game.json". Open it and copy its contents into a local json file. Then upload that json here and watch away!</p>
+				<form action="https://slippi-light-online-parser.b3nd3rssbm.repl.co/" method="post" enctype="multipart/form-data">
+					Generate them here!
+					<label for="slp">Upload slp file</label>
+					<input type="file" id="slp" accept=".slp" name="slp">
+					<input type="submit">
+				</form>
 				<h3>OR</h3>
 				<p><a href="https://github.com/b3nd3r-ssbm/slippi-light-parser">Use the offline parser to generate JSONs</a></p>
 			</div>
