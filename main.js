@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const { default: SlippiGame } = require('@slippi/slippi-js');
 const fs=require('fs');
+//const Buffer=require('Buffer');
 //const { autoUpdater } = require('electron-updater');
 var frames;
 var stage;
@@ -33,8 +34,6 @@ var showAction=true;
 var p1State;
 var p2State;
 var prefix;
-var fileDir;
-var directory;
 var sel;
 var speed=1;
 var frameMil=16.67;
@@ -47,10 +46,7 @@ var p1Port=0;
 var p2Port=1;
 var pastActShow=true
 var optionsUp=false;
-fs.readFile('setup.txt', 'utf8', function(err, data){ 
-	fileDir=data;
-});
-var slpFileList;
+var slpFileText;
 //autoUpdater.checkForUpdatesAndNotify();
 if(app!== undefined){
 	app.on('ready',function(){
@@ -128,19 +124,6 @@ function updateSpeed(){
 	speed=parseFloat(document.getElementById('speed').value);
 	frameRate(60*speed);
 }
-function readTheDir(){
-	showDir();
-	fs.readdir(fileDir,  
-  { withFileTypes: true }, 
-  (err, files) => { 
-  if(err){ 
-    console.log(err);
-  }
-  else { 
-    slpFileList=files; 
-  } 
-}); 
-}
 function restartSelection(){
 	var showStuff=select('#init');
 	showStuff.style('display','block');
@@ -149,25 +132,11 @@ function restartSelection(){
 function selectionPage(){
 	var showStuff=select('#init');
 	showStuff.style('display','block');
-	readTheDir();
 	sel.style('display','block');
-	var i=0;
-	var currentFile;
-	if(slpFileList!=undefined){
-		for(i=0;i<slpFileList.length;i++){
-			currentFile=slpFileList[i].name;
-			if(currentFile.substring(currentFile.length-4)===".slp"){
-				sel.option(currentFile);
-			}
-		}
-	}
 }
 function showButtons(){
-	readTheDir();
 	var selection=select('#buttonPage');
 	selection.style('display','block');
-	selection=select('#fileDir');
-	selection.style('display','none');
 	selectionPage();
 }
 function makeOption(textStr){
@@ -187,22 +156,15 @@ function submitCombos(){
 	play();
 	pause();
 }
-function showDir(){
-	fs.readFile('setup.txt', 'utf8', function(err, data){ 
-		fileDir=data;
-		document.getElementById("dirHere").innerHTML=data;		
-	});
-	}
-function changeDir(){
-	var unhide=select('#fileDir');
-	unhide.style('display','block');
-}
 function process(){
+	document.getElementById("fileIn").files[0].arrayBuffer().then(buffer => {
+		slpFileText=buffer;
+		innerProcess();
+	});
+}
+function innerProcess(){
 	sel.style('display','none');
-	directory=fileDir;
-	directory+="/";
-	directory+=sel.value();
-	game = new SlippiGame(directory);
+	game = new SlippiGame(Buffer.from(slpFileText));
 	frames=game.getFrames();
 	settings=game.getSettings();
 	stage=settings.stageId;
@@ -267,8 +229,6 @@ function process(){
 	var unhideIt=select('#unhide');
 	unhideIt.style('display','block');
 	selection=select('#init');
-	selection.style('display','none');
-	selection=select('#fileDir');
 	selection.style('display','none');
 	var xhttp=new XMLHttpRequest();
 	xhttp.onreadystatechange=function(){

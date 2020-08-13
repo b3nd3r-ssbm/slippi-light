@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Slippi Light v1.4.3</title>
+		<title>Slippi Light v1.5.0</title>
 		<meta charset='utf-8'>
 	</head>
 	<body>
 		<script src="./p5.min.js"></script>
 		<script src="./main.js"></script>
 		<div id="init">
-			<h1>Current Directory: <span id="dirHere"><span></h1>
-			<button onclick="changeDir()">Edit Directory</button>
-			<button onclick="showButtons()">Select Replay (Click Twice)</button>
+			<button onclick="showButtons()">Select Replay</button>
 		</div>
 		<div id="buttonPage" style="display:none">
-			<h2>Choose Your File</h2>
+			<label for="fileIn">Choose your file</label>
+			<input type="file" id="fileIn" accept="slp">
 			<button onclick="process()">Submit</button>
-		</div>
-		<div id="fileDir" style="display:none">
-			<label for="newDir">Paste the path to the new directory here</label>
-			<input type="text" id="newDir">
-			<button onclick="updateDir()">Update Directory</button>
 		</div>
 		<div id="unhide" style="display:none">
 			<button id="pause" onclick="playPause()">Play/Pause</button>
