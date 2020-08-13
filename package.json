@@ -18,8 +18,7 @@
       "main.js",
       "p5.min.js",
       "package.json",
-      "actionStates.csv",
-      "setup.txt"
+      "actionStates.csv"
     ],
     "artifactName": "Slippi-Light-${version}-${os}.${ext}",
     "mac": {
