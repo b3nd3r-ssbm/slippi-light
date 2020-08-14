@@ -42,8 +42,9 @@ var dropdownIndex=[];
 var generated=false;
 var p1Port=0;
 var p2Port=1;
-var pastActShow=true;
+var pastActShow=false;
 var optionsUp=false;
+var myCanvas;
 //autoUpdater.checkForUpdatesAndNotify();
 /*function dropHandler(ev) { 
 	ev.preventDefault();
@@ -58,13 +59,17 @@ var optionsUp=false;
 }*/
 function setup(){
 	loop();
-	createCanvas(0,0);
-	sel=createSelect();
-	sel.style('display','none');
+	myCanvas=createCanvas(0,0);
+	myCanvas.parent("body");
+}
+function fileShow(){
+	document.getElementById("fileName").textContent=document.getElementById("fileIn").files[0].name;
 }
 function newAct(action1,action2){
-	document.getElementById("p1ActText").textContent=action1+" "+document.getElementById("p1ActText").textContent;
-	document.getElementById("p2ActText").textContent=action2+" "+document.getElementById("p2ActText").textContent;
+	if(playing){
+		document.getElementById("p1ActText").textContent=action1+" "+document.getElementById("p1ActText").textContent;
+		document.getElementById("p2ActText").textContent=action2+" "+document.getElementById("p2ActText").textContent;
+	}
 }
 function togglePastAct(){
 	const hideActs=select('#pastActions');
@@ -92,12 +97,10 @@ function updateSpeed(){
 function restartSelection(){
 	var showStuff=select('#init');
 	showStuff.style('display','block');
-	sel.style('display','block');
 }
 function selectionPage(){
 	var showStuff=select('#init');
 	showStuff.style('display','block');
-	sel.style('display','block');
 	var i=0;
 	var currentFile;
 	if(slpFileList!=undefined){
@@ -219,7 +222,8 @@ function process(){
 		firstFrame();
 		showStuff();
 	});
-	
+	var hello=document.getElementById("body");
+	hello.center();
 }
 function jsonTut(){
 	var unhideIt=select('#jsonTut');
