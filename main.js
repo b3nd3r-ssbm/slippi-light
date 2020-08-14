@@ -44,9 +44,10 @@ var dropdownIndex=[];
 var generated=false;
 var p1Port=0;
 var p2Port=1;
-var pastActShow=true
+var pastActShow=false;
 var optionsUp=false;
 var slpFileText;
+var myCanvas;
 //autoUpdater.checkForUpdatesAndNotify();
 if(app!== undefined){
 	app.on('ready',function(){
@@ -72,9 +73,11 @@ if(app!== undefined){
 
 function setup(){
 	loop();
-	createCanvas(0,0);
-	sel=createSelect();
-	sel.style('display','none');
+	myCanvas=createCanvas(0,0);
+	myCanvas.parent("body");
+}
+function updateFile(){
+	document.getElementById("slpName").textContent=document.getElementById("fileIn").files[0].name;
 }
 function options(){
 	const hideOpt=select('#options');
@@ -109,8 +112,10 @@ function updateDir(){
 	});
 }
 function newAct(action1,action2){
-	document.getElementById("p1ActText").textContent=action1+" "+document.getElementById("p1ActText").textContent;
-	document.getElementById("p2ActText").textContent=action2+" "+document.getElementById("p2ActText").textContent;
+	if(playing){
+		document.getElementById("p1ActText").textContent=action1+" "+document.getElementById("p1ActText").textContent;
+		document.getElementById("p2ActText").textContent=action2+" "+document.getElementById("p2ActText").textContent;
+	}
 }
 function toggleHitbox(){
 	if(showHitbox){
@@ -127,17 +132,16 @@ function updateSpeed(){
 function restartSelection(){
 	var showStuff=select('#init');
 	showStuff.style('display','block');
-	sel.style('display','block');
 }
 function selectionPage(){
 	var showStuff=select('#init');
 	showStuff.style('display','block');
-	sel.style('display','block');
 }
 function showButtons(){
 	var selection=select('#buttonPage');
 	selection.style('display','block');
-	selectionPage();
+	var sel=select('#init');
+	sel.style('display','none');
 }
 function makeOption(textStr){
 	var thisSelect=document.getElementById("comboDropdown");
@@ -163,7 +167,6 @@ function process(){
 	});
 }
 function innerProcess(){
-	sel.style('display','none');
 	game = new SlippiGame(Buffer.from(slpFileText));
 	frames=game.getFrames();
 	settings=game.getSettings();
@@ -520,17 +523,9 @@ function frameAdvance(){
 }
 function pause(){
 	playing=false;
-	var hideIt=select('#pause');
-	hideIt.style('display','none');
-	var showIt=select('#play');
-	showIt.style('display','block');
 }
 function play(){
 	playing=true;
-	var hideIt=select('#play');
-	hideIt.style('display','none');
-	var showIt=select('#pause');
-	showIt.style('display','block');
 }
 function keyTyped(){
 	if(key===' '){
@@ -764,6 +759,14 @@ function drawHitbox(player,side){
 	}
 	else if(player===1){//p2
 		hitbox(side,p2X,p2Y,frames[currentFrame].players[p2Port].post.facingDirection);
+	}
+}
+function playPause(){
+	if(playing){
+		pause();
+	}
+	else{
+		play();
 	}
 }
 function hitbox(side,startX,startY,facing){
