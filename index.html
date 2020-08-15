@@ -4,78 +4,113 @@
 		<title>Slippi Light in Browser</title>
 		<meta charset='utf-8'>
 		<style>
-			body{background-color:#1d1a1a;color:white;justify-content:center;}
-			.body{position:relative;display:flex;justify-content:center;}
-			button{background-color:#4caf50 !important; border:none;font-size:16px;}
-			button:hover{background-color:#11ff11 !important;}
-			.button{background-color:#4caf50 !important; border:none;font-size:18px !important;color:#000000 !important;display:inline-block;padding:4px 4px;}
-			.button:hover{background-color:#11ff11 !important;}
+			body{background-color:#1d1a1a;color:white;font-family:Segoe UI;font-size:18px;}
+			.body{position:relative;display:flex;}
+			button{background-color:#ffffff !important; border:none;font-size:18px; color:#000;font-family:Segoe UI;}
+			button:hover{background-color:#aaaaaa !important;}
+			.button{background-color:#ffffff !important; border:none;font-size:18px !important;color:#000 !important;display:inline-block;}
+			.noClickButton{background-color:#ffffff !important; border:none;font-size:18px !important;color:#000 !important;display:inline-block;}
+			.button:hover{background-color:#aaaaaa !important;}
 			#fileShow{
 				background:none !important;
 				color:white !important;
 			}
-			a:link{
-				color:#ffffff !important;
+			.options {
+				display: none;
+				position: absolute;
+				min-width: 160px;
+				box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+				z-index: 1;
+				background-color:#ffffff;
 			}
-			a:visited{
-				color:#aaaaaa !important;
+			.dropdown:hover .options {display: block;}
+			.top-bar {
+				background-color:#ffffff;
 			}
-			a{
-				position:relative;
+			input {
+				font-family:Segoe UI;
+				font-size:18px;
+			}
+			select {
+				font-family:Segoe UI;
+				font-size:18px;
 			}
 		</style>
 	</head>
 	<body>
-		<h3><div style="width:100%;justify-content:center;display:flex"><a href="https://github.com/b3nd3r-ssbm/slippi-light">Download the Full Version</a></div></h3><br>
 		<div class="body">
 		<script src="./p5.min.js"></script>
 		<script src="./main.js"></script>
-		<div id="init">
-			<label for="fileIn"><span class="button">Upload processed JSON from slp file </span><span id="fileName">No File Selected</span></label>
-			<input type="file" accept=".json" id="fileIn" style="display:none" onchange="fileShow()">
-			<button onclick="process()">Submit</button><br>
-			<br><button onclick="jsonTut()">How Do I get JSONs for this?</button>
+		<div id="postInit">
+			<div id="jsonUp"style="display:inline">
+				<div id="init" style="display:inline">
+					<button onclick="window.location.href='https://github.com/b3nd3r-ssbm/slippi-light';">Download the full version</button>
+				</div>
+				<label for="fileIn"><span class="button" onclick="showName()">Upload processed JSON from slp file </span><span id="fileName" style="display:none">No File Selected</span></label>
+				<input type="file" accept=".json" id="fileIn" style="display:none" onchange="fileShow()">
+				<button onclick="process()" id="unseen" style="display:none">Submit</button>
+				<button onclick="jsonTut()">How Do I get JSONs for this?</button>
+				<div id="g7Opt" style="display:inline">
+					<br><h3>OR</h3><br>
+					<button onclick="g7GrandsShow()">Watch Genesis 7 Grand Finals</button>
+					<div id="g7" style="display:none">
+						<label for="g7Drop">Choose a Game</label><br>
+						<select id="g7Drop">
+							<option>Game 1</option>
+							<option>Game 2</option>
+							<option>Game 3</option>
+							<option>Game 4</option>
+							<option>Game 5</option>
+						</select><br>
+						<button onclick="g7Grands()">Submit</button>
+					</div>
+				</div>
+			</div>
 			<div id="jsonTut" style="display:none">
 				<form action="https://slippi-light-online-parser.b3nd3rssbm.repl.co/" method="post" enctype="multipart/form-data">
-					<label for="slp">Generate them here!<span class="button">Upload slp file</span><span id="slpFileName">No File Selected</span></label>
+					<label for="slp">Generate them here!<span class="button" onclick="showSlpName()">Upload slp file</span><span id="slpFileName" style="display:none">No File Selected</span></label>
 					<input type="file" id="slp" accept=".slp" name="slp" style="display:none" onchange="slpFileShow()">
 					<input type="submit" class="button">
 				</form>
 				<h3>OR</h3>
-				<p><a href="https://github.com/b3nd3r-ssbm/slippi-light-parser">Use the offline parser to generate JSONs</a></p>
-			</div>
-			<br><h3>OR</h3><br>
-			<button onclick="g7GrandsShow()">Watch Genesis 7 Grand Finals</button>
-			<div id="g7" style="display:none">
-				<label for="g7Drop">Choose a Game</label><br>
-				<select id="g7Drop">
-					<option>Game 1</option>
-					<option>Game 2</option>
-					<option>Game 3</option>
-					<option>Game 4</option>
-					<option>Game 5</option>
-				</select><br>
-				<button onclick="g7Grands()">Submit</button>
+				<p><button onclick="window.location.href'https://github.com/b3nd3r-ssbm/slippi-light-parser';">Use the offline parser to generate JSONs</button></p>
+				<div id="g7Opt" style="display:inline">
+					<br><h3>OR</h3><br>
+					<button onclick="g71GrandsShow()">Watch Genesis 7 Grand Finals</button>
+					<div id="g71" style="display:none">
+						<label for="g7Drop">Choose a Game</label><br>
+						<select id="g7Drop">
+							<option>Game 1</option>
+							<option>Game 2</option>
+							<option>Game 3</option>
+							<option>Game 4</option>
+							<option>Game 5</option>
+						</select><br>
+						<button onclick="g7Grands()">Submit</button>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="unhide" style="display:none">
+			<div class="top-bar">
 			<button id="pause" onclick="playPause()">Play/Pause</button>
-			<button onclick="options()">Show/Hide Options</button>
-			<a href="https://github.com/b3nd3r-ssbm/slippi-light/blob/master/actionStateReference.csv">What do the action states mean?</a>
-			<div id="options" style="display:none">
-				<button onclick="restart()">Play another slp file</button>
-				<button onclick="frameAdvance()">Forward one frame</button>
+			<button onclick="restart()">Play another slp file</button>
+			<button onclick="comboPage()">Generate/View Combos</button>
+			<button onclick="frameAdvance()">Forward one frame</button>
+			<div class="dropdown" style="display:inline">
+			<button class="dropBtnO">Options</button>
+			<div class="options">
 				<button onclick="changeAction()">Show/Hide Action States</button>
 				<button onclick="toggleHitbox()">Show/Hide "Hitboxes"</button>
-				Playback Speed (default is 1):
+				<span class="noClickButton">Speed:</span>
 				<input type="number" id="speed" placeholder="1.0" step="0.25" onchange="updateSpeed()" min="0.25" max="4.0">
-				<button onclick="comboPage()">Generate/View Combos</button>
 				<button onclick="togglePastAct()">Show/Hide Past Action States</button>
-			</div>
-				<div id="pastActions" style="display:none;flex-direction:row;">
-					<div id="p1Act" style="display:flex;flex-direction:column;height:100px;width:180px;border:1px solid #4e4e4e;font:16px Arial, Serif;overflow:auto;">P1 Actions:<br><span id="p1ActText"></span></div>
-					<div id="p2Act" style="display:flex;flex-direction:column;height:100px;width:180px;border:1px solid #4e4e4e;font:16px Arial, Serif;overflow:auto;">P2 Actions:<br><span id="p2ActText"></span></div>
+			</div></div>
+				<div id="pastActions" style="display:none;flex-direction:row;background-color:#1d1a1a !important;">
+					<div id="p1Act" style="display:flex;flex-direction:column;height:100px;width:180px;border:1px solid #4e4e4e;overflow:auto;">P1 Actions:<br><span id="p1ActText"></span></div>
+					<div id="p2Act" style="display:flex;flex-direction:column;height:100px;width:180px;border:1px solid #4e4e4e;overflow:auto;">P2 Actions:<br><span id="p2ActText"></span></div>
 				</div>
+		</div>
 		</div>
 		<div id="combos" style="display:none">
 			<label for="percent">Minimum Percentage Done</label>
@@ -92,7 +127,7 @@
 			<button onclick="filterCombos()">Submit!</button>
 		</div>
 		<div id="comboPick" style="display:none">
-			<select id="comboDropdown"></select><br>
+			<select id="comboDropdown"></select><br><br>
 			<button onclick="submitCombos()">View selected Combo</button>
 		</div>
 		</div>

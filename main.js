@@ -45,6 +45,9 @@ var p2Port=1;
 var pastActShow=false;
 var optionsUp=false;
 var myCanvas;
+if(getCookie("darkMode")==""){
+	document.cookie="darkMode=true";
+}
 //autoUpdater.checkForUpdatesAndNotify();
 /*function dropHandler(ev) { 
 	ev.preventDefault();
@@ -61,6 +64,31 @@ function setup(){
 	loop();
 	myCanvas=createCanvas(0,0);
 	myCanvas.parent("body");
+}
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+function showSlpName(){
+	var showTheName=select('#slpFileName');
+	showTheName.style("display","inline");
+}
+function showName(){
+	var showTheName=select('#fileName');
+	showTheName.style("display","inline");
+	showTheName=select('#unseen');
+	showTheName.style("display","inline");
 }
 function fileShow(){
 	document.getElementById("fileName").textContent=document.getElementById("fileIn").files[0].name;
@@ -96,11 +124,11 @@ function updateSpeed(){
 }
 function restartSelection(){
 	var showStuff=select('#init');
-	showStuff.style('display','block');
+	showStuff.style('display','inline');
 }
 function selectionPage(){
 	var showStuff=select('#init');
-	showStuff.style('display','block');
+	showStuff.style('display','inline');
 	var i=0;
 	var currentFile;
 	if(slpFileList!=undefined){
@@ -115,7 +143,7 @@ function selectionPage(){
 function showButtons(){
 	readTheDir();
 	var selection=select('#buttonPage');
-	selection.style('display','block');
+	selection.style('display','inline');
 	selection=select('#fileDir');
 	selection.style('display','none');
 	selectionPage();
@@ -130,7 +158,7 @@ function submitCombos(){
 	var hideIt=select('#comboPick');
 	hideIt.style('display','none');
 	hideIt=select('#unhide');
-	hideIt.style('display','block');
+	hideIt.style('display','inline');
 	var curSel=document.getElementById("comboDropdown");
 	currentFrame=combos[dropdownIndex[curSel.selectedIndex]].startFrame;
 	lastFrame=combos[dropdownIndex[curSel.selectedIndex]].endFrame;
@@ -145,7 +173,7 @@ function showDir(){
 	}
 function changeDir(){
 	var unhide=select('#fileDir');
-	unhide.style('display','block');
+	unhide.style('display','inline');
 }
 function process(){
 	var initGame = document.getElementById("fileIn").files[0];
@@ -222,19 +250,18 @@ function process(){
 		firstFrame();
 		showStuff();
 	});
-	var hello=document.getElementById("body");
-	hello.center();
 }
 function jsonTut(){
 	var unhideIt=select('#jsonTut');
-	unhideIt.style('display','block');
+	unhideIt.style('display','inline');
+	unhideIt=select('#jsonUp');
+	unhideIt.style('display','none');
 }
 function showStuff(){
 		var unhideIt=select('#unhide');
-		unhideIt.style('display','block');
-		var selection=select('#init');
+		unhideIt.style('display','inline');
+		var selection=select('#postInit');
 		selection.style('display','none');
-		unhideIt=select('pastActions');
 }
 function stages(){
 	switch(stage){
@@ -260,7 +287,11 @@ function stages(){
 }
 function g7GrandsShow(){
 	var viewer=select('#g7');
-	viewer.style('display','block');
+	viewer.style('display','inline');
+}
+function g71GrandsShow(){
+	var viewer=select('#g71');
+	viewer.style('display','inline');
 }
 function g7Grands(){
 	var gameNum=document.getElementById("g7Drop").selectedIndex;
@@ -447,7 +478,7 @@ function options(){
 	else {
 		optionsUp=true;
 		pause();
-		hideOpt.style("display","block");
+		hideOpt.style("display","inline");
 	}
 }
 function comboPage(){
@@ -458,7 +489,7 @@ function comboPage(){
 	hideStuff.style('display','none');
 	if(!generated){
 		hideStuff=select('#combos');
-		hideStuff.style('display','block');
+		hideStuff.style('display','inline');
 		generated=true;
 	}
 	else{
@@ -524,7 +555,7 @@ function filterCombos(){
 	}
 	}
 	var unhideItNow=select('#comboPick');
-	unhideItNow.style('display','block');
+	unhideItNow.style('display','inline');
 	fill(255);
 	noStroke();
 	square(0,0,2000);
