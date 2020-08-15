@@ -349,8 +349,6 @@ function comboPage(){
 	rect(0,0,2000,2000);
 	var hideStuff=select('#unhide');
 	hideStuff.style('display','none');
-	hideStuff=select('#play');
-	hideStuff.style('display','none');
 	if(!generated){
 		hideStuff=select('#combos');
 		hideStuff.style('display','block');

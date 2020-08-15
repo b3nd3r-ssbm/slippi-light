@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Slippi Light v1.5.1</title>
+		<title>Slippi Light v1.5.2</title>
 		<meta charset='utf-8'>
 		<style>
-			body{background-color:#1d1a1a;color:white;justify-content:center;}
-			.body{position:relative;display:flex;justify-content:center;}
-			button{background-color:#4caf50 !important; border:none;font-size:16px;}
-			button:hover{background-color:#11ff11 !important;}
-			.button{background-color:#4caf50 !important; border:none;font-size:18px !important;color:#000000 !important;display:inline-block;padding:4px 4px;}
-			.button:hover{background-color:#11ff11 !important;}
-			input[type="file"] {
-				display:none;
+			body{background-color:#1d1a1a;color:white;font-family:Segoe UI;}
+			.body{position:relative;display:flex;}
+			button{background-color:#ffffff !important; border:none;font-size:18px; color:#000;font-family:Segoe UI;}
+			button:hover{background-color:#aaaaaa !important;}
+			.button{background-color:#ffffff !important; border:none;font-size:18px !important;color:#000 !important;display:inline-block;}
+			.noClickButton{background-color:#ffffff !important; border:none;font-size:18px !important;color:#000 !important;display:inline-block;}
+			.button:hover{background-color:#aaaaaa !important;}
+			#fileShow{
+				background:none !important;
+				color:white !important;
 			}
-			a:link{
-				color:#ffffff !important;
+			.options {
+				display: none;
+				position: absolute;
+				min-width: 160px;
+				box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+				z-index: 1;
+				background-color:#ffffff;
 			}
-			a:visited{
-				color:#aaaaaa !important;
+			.dropdown:hover .options {display: block;}
+			.top-bar {
+				background-color:#ffffff;
+			}
+			select {
+				font-family:Segoe UI;
+				font-size:18px;
+			}
+			input {
+				font-family:Segoe UI;
+				font-size:18px;
 			}
 		</style>
 	</head>
@@ -25,34 +41,36 @@
 		<script src="./p5.min.js"></script>
 		<script src="./main.js"></script>
 		<div class="body">
-		<div id="init">
+		<div id="init" style="display:none">
 			<button onclick="showButtons()">Select Replay</button>
 		</div>
-		<div id="buttonPage" style="display:none">
-			<div class="buttonWrap" style="position:relative">
-				<label for="fileIn"><span class="button">Choose your file</span><span id="slpName">No File Selected</span></label>
-				<input type="file" id="fileIn" accept=".slp" onchange="updateFile()">
-			</div><br><br>
+		<div id="buttonPage">
+			<div class="buttonWrap" style="position:relative;display:inline;">
+				<label for="fileIn"><span class="button">Choose your file</span><br><span id="slpName">No File Selected</span></label>
+				<input type="file" id="fileIn" accept=".slp" onchange="updateFile()" style="display:none">
+			</div>
 			<button onclick="process()">Submit</button>
 		</div>
 		<div id="unhide" style="display:none">
+			<div class="top-bar">
 			<button id="pause" onclick="playPause()">Play/Pause</button>
-			<button onclick="options()">Show/Hide Options</button>
-			<a href="https://github.com/b3nd3r-ssbm/slippi-light/blob/master/actionStateReference.csv">What do the action states mean?</a>
-			<div id="options" style="display:none">
-				<button onclick="restart()">Play another slp file</button>
-				<button onclick="frameAdvance()">Forward one frame</button>
+			<button onclick="restart()">Play another slp file</button>
+			<button onclick="comboPage()">Generate/View Combos</button>
+			<button onclick="frameAdvance()">Forward one frame</button>
+			<div class="dropdown" style="display:inline">
+			<button class="dropBtnO">Options</button>
+			<div class="options">
 				<button onclick="changeAction()">Show/Hide Action States</button>
 				<button onclick="toggleHitbox()">Show/Hide "Hitboxes"</button>
-				Playback Speed (default is 1):
+				<span class="noClickButton">Speed:</span>
 				<input type="number" id="speed" placeholder="1.0" step="0.25" onchange="updateSpeed()" min="0.25" max="4.0">
-				<button onclick="comboPage()">Generate/View Combos</button>
 				<button onclick="togglePastAct()">Show/Hide Past Action States</button>
-			</div>
-				<div id="pastActions" style="display:none;flex-direction:row;">
-					<div id="p1Act" style="height:100px;width:180px;border:1px solid #4e4e4e;font:16px Arial, Serif;overflow:auto;">P1 Actions:<br><span id="p1ActText"></span></div>
-					<div id="p2Act" style="height:100px;width:180px;border:1px solid #4e4e4e;font:16px Arial, Serif;overflow:auto;">P2 Actions:<br><span id="p2ActText"></span></div>
+			</div></div>
+				<div id="pastActions" style="display:none;flex-direction:row;background-color:#1d1a1a !important;">
+					<div id="p1Act" style="display:flex;flex-direction:column;height:100px;width:180px;border:1px solid #4e4e4e;overflow:auto;">P1 Actions:<br><span id="p1ActText"></span></div>
+					<div id="p2Act" style="display:flex;flex-direction:column;height:100px;width:180px;border:1px solid #4e4e4e;overflow:auto;">P2 Actions:<br><span id="p2ActText"></span></div>
 				</div>
+		</div>
 		</div>
 		<div id="combos" style="display:none">
 			<label for="percent">Minimum Percentage Done</label>
