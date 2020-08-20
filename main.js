@@ -93,6 +93,9 @@ function showName(){
 function fileShow(){
 	document.getElementById("fileName").textContent=document.getElementById("fileIn").files[0].name;
 }
+function slpFileShow(){
+	document.getElementById("slpFileName").textContent=document.getElementById("slp").files[0].name;
+}
 function newAct(action1,action2){
 	if(playing){
 		document.getElementById("p1ActText").textContent=action1+" "+document.getElementById("p1ActText").textContent;
