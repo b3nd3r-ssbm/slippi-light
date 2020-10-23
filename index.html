@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Slippi Light v1.5.2</title>
+		<title>Slippi Light v2.0.0</title>
 		<meta charset='utf-8'>
 		<style>
 			body{background-color:#1d1a1a;color:white;font-family:Segoe UI;}
@@ -35,6 +35,17 @@
 				font-family:Segoe UI;
 				font-size:18px;
 			}
+			.circle {
+				height: 25px;
+				width: 25px;
+				border-radius: 50%;
+			}
+			.inputButton{
+				height: 10px;
+				width: 10px;
+				border-radius: 50%;
+				border:solid;
+			}
 		</style>
 	</head>
 	<body>
@@ -64,7 +75,9 @@
 				<button onclick="toggleHitbox()">Show/Hide "Hitboxes"</button>
 				<span class="noClickButton">Speed:</span>
 				<input type="number" id="speed" placeholder="1.0" step="0.25" onchange="updateSpeed()" min="0.25" max="4.0">
+				<button onclick="toggleInputDisplay()">Show/Hide Input Display</button>
 				<button onclick="togglePastAct()">Show/Hide Past Action States</button>
+				<button onclick="linkCsv()">Action State Meaning</button>
 			</div></div>
 				<div id="pastActions" style="display:none;flex-direction:row;background-color:#1d1a1a !important;">
 					<div id="p1Act" style="display:flex;flex-direction:column;height:100px;width:180px;border:1px solid #4e4e4e;overflow:auto;">P1 Actions:<br><span id="p1ActText"></span></div>
@@ -92,5 +105,31 @@
 		</div>
 		</div>
 		<div id="body"></div>
+		<div id="inputs" style="display:none">
+			<div id="p1Back" style="position:absolute;top:200px;left:1100px;">
+				<div id="p1In" style="position:relative">
+					<p style="position:absolute;top:-70px">P1 Inputs:</p>
+					<span class="circle" id="p1Stick" style="position: absolute; background-color: rgb(187, 187, 187); top: 20px; left: 20px;"></span>
+					<span class="circle" id="p1CStick" style="position:absolute;background-color:#ff0;top: 40px;left: 100px;"></span>
+					<span class="inputButton" id="p1YButton" style="position:absolute;color:#bbb;left:90px;top:-10px;"></span>
+					<span class="inputButton" id="p1XButton" style="position:absolute;color:#bbb;left:107px;"></span>
+					<span class="inputButton" id="p1AButton" style="position:absolute;color:#0fa;left:90px;top:7px"></span>
+					<span class="inputButton" id="p1BButton" style="position:absolute;color:#f0a;left:74px;top:13px"></span>
+					<span class="inputButton" id="p1ZButton" style="position:absolute;color:#60f;left:109px;top:-15px;height:5px;width:5px"></span>
+				</div>
+			</div>
+			<div id="p2Back" style="position:absolute;top:400px;left:1100px;">
+				<div id="p2In" style="position:relative">
+					<p style="position:absolute;top:-70px">P2 Inputs:</p>
+					<span class="circle" id="p2Stick" style="position: absolute; background-color: rgb(187, 187, 187); top: 20px; left: 20px;"></span>
+					<span class="circle" id="p2CStick" style="position:absolute;background-color:#ff0;top: 40px;left: 100px;"></span>
+					<span class="inputButton" id="p2YButton" style="position:absolute;color:#bbb;left:90px;top:-10px;"></span>
+					<span class="inputButton" id="p2XButton" style="position:absolute;color:#bbb;left:107px;"></span>
+					<span class="inputButton" id="p2AButton" style="position:absolute;color:#0fa;left:90px;top:7px"></span>
+					<span class="inputButton" id="p2BButton" style="position:absolute;color:#f0a;left:74px;top:13px"></span>
+					<span class="inputButton" id="p2ZButton" style="position:absolute;color: #60f;left:109px;top:-15px;height:5px;width:5px"></span>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

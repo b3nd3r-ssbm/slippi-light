@@ -1,6 +1,7 @@
 const {app, BrowserWindow} = require('electron');
 const {default: SlippiGame} = require('@slippi/slippi-js');
 const fs = require('fs');
+const { shell }=require('electron');
 // const Buffer=require('Buffer'); const { autoUpdater } =
 // require('electron-updater');
 var frames;
@@ -97,6 +98,9 @@ function options() {
         hideOpt.style("display", "block");
         pause();
     }
+}
+function linkCsv(){
+	shell.openExternal("https://github.com/b3nd3r-ssbm/slippi-light/blob/master/actionStateReference.csv");
 }
 function togglePastAct() {
     const hideActs = select('#pastActions');
@@ -686,6 +690,83 @@ function buttonLogic() {
     } else {
         document
             .getElementById("p1YButton")
+            .style
+            .background = "#1d1a1a";
+    }
+	buttonString = frames[currentFrame]
+        .players[1]
+        .pre
+        .physicalButtons
+        .toString(2);
+    while (buttonString.length < 13) {
+        buttonString = "0" + buttonString;
+    }
+    buttonString = buttonString.substring(4, 12);
+
+    if (buttonString.charAt(7) == '1') {
+        document
+            .getElementById("p2ZButton")
+            .style
+            .background = "#60f";
+    } else {
+        document
+            .getElementById("p2ZButton")
+            .style
+            .background = "#1d1a1a";
+    }
+    /*if(buttonString.charAt(6)=='1'){
+		document.getElementById("p2ZButton").style.background="#60f";
+	}
+	else{
+		document.getElementById("p2ZButton").style.background="#1d1a1a";
+	}
+	if(buttonString.charAt(5)=='1'){
+		document.getElementById("p2ZButton").style.background="#60f";
+	}
+	else{
+		document.getElementById("p2ZButton").style.background="#1d1a1a";
+	}*/
+    if (buttonString.charAt(3) == '1') {
+        document
+            .getElementById("p2AButton")
+            .style
+            .background = "#0fa";
+    } else {
+        document
+            .getElementById("p2AButton")
+            .style
+            .background = "#1d1a1a";
+    }
+    if (buttonString.charAt(2) == '1') {
+        document
+            .getElementById("p2BButton")
+            .style
+            .background = "#f0a";
+    } else {
+        document
+            .getElementById("p2BButton")
+            .style
+            .background = "#1d1a1a";
+    }
+    if (buttonString.charAt(1) == '1') {
+        document
+            .getElementById("p2XButton")
+            .style
+            .background = "#bbb";
+    } else {
+        document
+            .getElementById("p2XButton")
+            .style
+            .background = "#1d1a1a";
+    }
+    if (buttonString.charAt(0) == '1') {
+        document
+            .getElementById("p2YButton")
+            .style
+            .background = "#bbb";
+    } else {
+        document
+            .getElementById("p2YButton")
             .style
             .background = "#1d1a1a";
     }
