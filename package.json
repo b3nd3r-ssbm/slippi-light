@@ -50,7 +50,7 @@
     "url": "https://github.com/b3nd3r-ssbm/slippi-light.git"
   },
   "dependencies": {
-    "@slippi/slippi-js": "^5.0.4",
+    "@slippi/slippi-js": "^6.5.0",
     "ejs": "^3.1.3"
   },
   "devDependencies": {
